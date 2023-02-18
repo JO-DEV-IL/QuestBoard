@@ -1,0 +1,77 @@
+﻿@page
+@model QuestBoard.Pages.Users.CreateModel
+@{
+}
+
+<div>
+    <br />
+    <h2>Create New Adventurer</h2>
+
+    @*If the error message variable is not empty (meaning the condition to fill it took place aka a field was not submitted) then display the error message up top*@
+    @if (Model.errorMessage.Length > 0)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>@Model.errorMessage</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @*POST method will send data from the form*@
+    <form method="post" style="width:1000px">
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Username</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="username" value="@Model.userInfo.username" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">First Name</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="firstName" value="@Model.userInfo.firstName" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Last Name</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="lastName" value="@Model.userInfo.lastName" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Age</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="age" value="@Model.userInfo.age" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Class</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="class_specialty" value="@Model.userInfo.class_specialty" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Password</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="password" value="@Model.userInfo.password" />
+            </div>
+        </div>
+
+        @*If the submit message variable is not empty (meaning the condition to fill it took place aka all fields were submitted) then display the success message at the bottom*@
+        @if (Model.successMessage.Length > 0)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>@Model.successMessage</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        @*Submit (sql query to add user info)/Cancel (goes to homepage)*@
+        <div class="row mb-3">
+            <div class="offset-sm-3 col-sm-3 d-grid">
+                <button type="submit" class="btn btn-warning">Submit</button>
+            </div>
+            <div class="col-sm-3 d-grid">
+                <a class="btn btn-outline-danger" href="/Users/Login" role="button">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

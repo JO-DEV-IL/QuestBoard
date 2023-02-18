@@ -1,0 +1,117 @@
+﻿@{
+    string activeUser = "";
+    if (ViewContext.HttpContext.Session.GetString("userActive") != null)
+    {
+        activeUser = ViewContext.HttpContext.Session.GetString("userActive");
+    }
+    else
+    {
+        activeUser = null;
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - QuestBoard</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/QuestBoard.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+</head>
+<body>
+    <header>
+
+        @*Hide the navbar if on the loading screen or login screen*@
+        @if (Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Loading" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Login" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Create")
+        {
+            <nav id="navbar" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3">
+                <div class="container">
+                    <a class="navbar-brand">QuestBoard</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li><img id="site_icon" src="~/images/qb_icon.png" /></li>
+                            <li class="nav-item"><a class="nav-link text-dark" asp-page="/Home">Home</a></li>
+                            <li class="nav-item">
+                                @if (activeUser != null)
+                                {
+                                    <a class="nav-link text-dark" asp-page="/Users/Inventory">Inventory</a>
+                                }
+                            </li>
+                            <li class="nav-item">
+                                @if (activeUser != null)
+                                {
+                                    <a class="nav-link text-dark" asp-page="/Shop">The Shop</a>
+                                }
+                            </li>
+                            <li class="nav-item">
+                                @if (activeUser != null && ViewContext.HttpContext.Session.GetString("isAdmin") == "Admin")
+                                {
+                                    <a class="nav-link text-dark" asp-page="/Users/Index">Admin Panel</a>
+                                }
+                            </li>
+                            <li class="nav-item">
+                                @if (activeUser != null)
+                                {
+                                    <a class="nav-link text-dark" asp-page="/Users/Quests">My Quests</a>
+                                }
+                            </li>
+                            <li class="nav-item">
+                                @if (activeUser != null)
+                                {
+                                    <a class="nav-link text-dark" asp-page="/Users/Logout">Logout</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link text-dark" asp-page="/Users/Login">Login</a>
+                                }
+                            </li>
+                            <li class="nav-item" style="color:darkred;font-weight:bolder">
+                                <a class="nav-link" asp-page="/Users?user=@activeUser">@activeUser</a>
+                            </li>
+                            <br />
+                            <li class="nav-item">
+                                @if (activeUser != null)
+                                {
+                                    <a class="btn btn-warning nav-link p-2" asp-page="/DungeonGates">Dungeon Run!</a>
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        }
+    </header>
+
+
+    <div style="display:flex;">
+        <div style="margin-left:25px">
+            @Html.Partial("_CharStats.cshtml")
+        </div>
+
+        <div class="content" style="text-align:center">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <footer class="footer text-muted">
+        <div class="container">
+            &copy; 2023 - QuestBoard - A Work In Progress by Jillian O'Keefe
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

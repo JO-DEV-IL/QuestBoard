@@ -1,0 +1,39 @@
+﻿@page
+@model QuestBoard.Pages.Users.QuestsModel
+@{
+}
+
+<form method="post">
+    <div class="form-group">
+        <label for="todoTitle">Quest Title</label>
+        <input type="text" class="form-control" id="todoTitle" name="todoTitle">
+    </div>
+    <div class="form-group">
+        <label for="todoDescription">Quest Description</label>
+        <input type="text" class="form-control" id="todoDescription" name="todoDescription">
+    </div>
+    <button type="submit" class="btn btn-primary">Post</button>
+</form>
+
+@*Display quest cards if they exist*@
+<div style="margin-top:25px">
+    <div class="card-group">
+        <div class="row">
+            @foreach (var todo in Model.listUserQuests)
+            {
+                <div class="col-sm-6">
+                    <div class="card text-white bg-dark mb-3" style="max-width: 18rem">
+                        @*<img src="~/images/scroll.jpg" class="card-img-top" alt="Quest Card">*@
+                        <div class="card-body">
+                            <h5 class="card-title">@todo.title</h5>
+                            <p class="card-text">@todo.description</p>
+                            <a href="#" class="btn btn-warning">View</a>
+                        </div>
+                        @*TODO: Format date to timezones*@
+                        <div class="card-footer"><small>@DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")</small></div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

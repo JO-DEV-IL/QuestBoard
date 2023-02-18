@@ -1,0 +1,15 @@
+﻿@page
+@model HomeModel
+@{
+	String user = ViewContext.HttpContext.Session.GetString("userActive");
+}
+
+<div id="container">
+	@if (user != null)
+	{
+		<h1>Welcome, @user.</h1>
+	}
+
+	<p>This is the homepage for QuestBoard.</p>
+	<img id="home_screen_icon" src="~/images/qb_icon.png" />
+</div>

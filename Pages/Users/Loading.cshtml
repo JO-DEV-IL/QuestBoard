@@ -1,0 +1,38 @@
+﻿@page
+@model QuestBoard.Pages.Users.LoadingModel
+@{
+
+}
+
+@*simple JS to wait 5 seconds before sending the user to the welcome page*@
+@section scripts{
+    <script>
+        setTimeout(function () {
+            window.location.href = "/Users/Welcome";
+        }, 5000); // wait for 5 seconds
+    </script>
+
+    <script>
+        var $loadingDots = $("#loading-dots");
+        var dots = ".";
+        setInterval(function () {
+            $loadingDots.text("Loading QuestBoard" + dots);
+            dots += ".";
+            if (dots.length > 3) {
+                dots = ".";
+            }
+        }, 500);
+    </script>
+
+}
+
+@*Font Awesome loading animation spin*@
+<div id="loading">
+    <i class="fas fa-ring fa-spin" style="font-size:50px;color:darkgoldenrod"></i>
+</div>
+
+<br />
+
+<div id="loading-dots" style="font-size:35px">
+    Loading QuestBoard...
+</div>

@@ -1,0 +1,18 @@
+﻿@page
+@model QuestBoard.Pages.InventoryModel
+@{
+}
+
+<table class="table table-striped m-auto table-hover">
+	<tbody>
+		@foreach (var item in Model.listUsersItems)
+		{
+			<tr>
+				<td>@item.name</td>
+				<td>@item.quantity</td>
+				<td><img style="height:30px" src="@item.image_path" alt="alt" /></td>
+				<td><a class="btn btn-warning btn-sm" href="/ViewItem/Show?item=@item.name">View</a></td>
+			</tr>
+		}
+	</tbody>
+</table>

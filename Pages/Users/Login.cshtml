@@ -1,0 +1,54 @@
+﻿@page
+@model QuestBoard.Pages.Users.LoginModel
+@{
+}
+
+@using System.Threading.Tasks
+
+@section scripts{
+
+}
+
+<div>
+    <img style="height:400px;padding:25px" src="~/images/qb_icon.png" alt="icon" />
+
+    <h2>QuestBoard Login</h2>
+
+    <br />
+
+    @*Alert for missing fields*@
+    @if (Model.errorMessage.Length > 0)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>@Model.errorMessage</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <form method="post" style="width:700px">
+        <div class="row mb-3">
+            @*Label not needed? Keeps fields properly aligned*@
+            <label class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-6">
+                <input placeholder="Leeroy Jenkins, StudMuffin69, etc." type="text" class="form-control" name="username" value="@Model.userInfo.username" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            @*Label not needed? Keeps fields properly aligned*@
+            <label class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-6">
+                <input placeholder="Enter your password" type="password" class="form-control" name="password" value="@Model.userInfo.password" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="offset-sm-3 col-sm-3 d-grid">
+                <button id="btnLogin" type="submit" class="btn btn-warning">Submit</button>
+            </div>
+            <div class="col-sm-3 d-grid">
+                <a class="btn btn-outline-danger" href="/" role="button">Cancel</a>
+            </div>
+        </div>
+        <p>New adventurer? <a href="/Users/Create">Register</a> here!</p>
+    </form>
+</div>
