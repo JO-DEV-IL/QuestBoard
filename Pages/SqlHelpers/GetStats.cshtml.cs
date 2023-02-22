@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration.UserSecrets;
@@ -44,40 +45,6 @@ namespace QuestBoard.Pages.SqlHelpers
                 GetStatsSQL(user);
                 GetEquipmentSQL(user);
             }
-        }
-
-        public void OnPost()
-        {
-            //string selectedAvatar = Request.Form["avatar"];
-            //string user = HttpContext.Session.GetInt32("userID").ToString();
-            //Console.WriteLine(selectedAvatar);
-            //Console.WriteLine(user);
-
-            string connectionString = "Data Source=JO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=FalseJO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False\"";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    string query = "UPDATE [questboard_app].[dbo].[user_stats] SET avatar_path = @avatar WHERE userID = @userID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        //command.Parameters.AddWithValue("@avatar", selectedAvatar);
-                        //command.Parameters.AddWithValue("@userID", user);
-                        command.ExecuteNonQuery();
-                    }
-
-                    connection.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-
-            Response.Redirect("/Users/Inventory");
         }
 
         public void GetStatsSQL(string user)
