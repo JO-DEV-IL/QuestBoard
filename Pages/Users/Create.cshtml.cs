@@ -43,11 +43,13 @@ namespace QuestBoard.Pages.Users
             {
                 try
                 {
-                    String connectionString = "Data Source=LAPTOP-14G24561\\LOCALHOST;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                    String connectionString = "Data Source=JO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=FalseLAPTOP-14G24561\\LOCALHOST;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
                         connection.Open();
-                        String sql = "INSERT into [questboard_app].[dbo].[users] (username,firstName,lastName,age,class,level,role,password) VALUES(@username,@firstName,@lastName,@age,@class,@level,@role,@password)";
+                        
+                        // Not only does the statement use the field values, but it also sets equipment to empty simoltaneously
+                        String sql = "INSERT into [questboard_app].[dbo].[users] (username,firstName,lastName,age,class,level,role,password) VALUES(@username,@firstName,@lastName,@age,@class,@level,@role,@password); INSERT INTO [questboard_app].[dbo].[user_equipment] (head,chest,arms,legs,feet,mainhand,offhand,accessory1,accessory2) values ('Empty','Empty','Empty','Empty','Empty','Empty','Empty','Empty','Empty')";
 
                         using (SqlCommand command = new SqlCommand(sql, connection))
                         {

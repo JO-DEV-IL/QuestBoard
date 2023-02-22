@@ -11,17 +11,23 @@
         @foreach (var userStats in sqlHelper.listUsersStats)
         {
             <ul style="list-style:none;border:2px solid black;box-shadow:5px 5px black;padding:35px; text-align:center">
-                
-                @*Edit Profile*@
-                <a class="btn btn-warning btn-sm"><i class="fa fa-cog"></i></a>
-                <br />
-                <br />
 
                 @*Avatar*@
                 <li>
-                    <div id="user-portrait">
-                        <img style="height:100px" src="@sqlHelper.listUsersStats[0].portrait" alt="avatar" />
-                    </div>
+                    <img style="height:110px" src="@sqlHelper.listUsersStats[0].portrait" alt="alt" />
+                    <br />
+                    <form method="post">
+                        <label for="avatar">Choose an avatar:</label>
+                        <select id="avatar" name="avatar" style="width:25px">
+                            <option value="/images/avatar01.png">bear</option>
+                            <option value="/images/avatar02.png">frog</option>
+                            <option value="/images/avatar03.png">mimic</option>
+                            <option value="/images/avatar04.png">skull</option>
+                            <option value="/images/avatar05.png">raven</option>
+                        </select>
+                        <button class="btn btn-sm btn-warning" type="submit">Update Avatar</button>
+                        <a class="btn btn-warning btn-sm"><i class="fa fa-cog"></i></a>
+                    </form>
                 </li>
                 <br />
 
