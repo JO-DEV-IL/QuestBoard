@@ -23,9 +23,6 @@ namespace QuestBoard.Pages.Users
                 string selectedAvatar = Request.Form["avatar"];
                 int user = (int)HttpContext.Session.GetInt32("userID");
 
-                Console.WriteLine(user);
-                Console.WriteLine(selectedAvatar);
-
                 string sql = "update [questboard_app].[dbo].[user_stats] set avatar_path = @avatar where userID = @userID";
                 using (SqlConnection connection = new SqlConnection("Data Source=JO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=FalseJO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
                 {
