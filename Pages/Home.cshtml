@@ -1,15 +1,39 @@
 ﻿@page
 @model HomeModel
 @{
-	String user = ViewContext.HttpContext.Session.GetString("userActive");
+    String user = ViewContext.HttpContext.Session.GetString("userActive");
 }
 
-<div id="container">
-	@if (user != null)
-	{
-		<h1>Welcome, @user.</h1>
-	}
+@section Scripts{
+    <script>
+        function toggleList() {
+            const list = document.getElementById("friends-list");
+            if (list.style.display === "none") {
+                list.style.display = "block";
+            } else {
+                list.style.display = "none";
+            }
+        }
+    </script>
+}
 
-	<p>This is the homepage for QuestBoard.</p>
-	<img id="home_screen_icon" src="~/images/qb_icon.png" />
+<div style="display:flex">
+    <div>
+        @if (user != null)
+        {
+            <h1>Welcome, @user.</h1>
+        }
+
+        <p>This is the homepage for QuestBoard.</p>
+        <img id="home_screen_icon" src="~/images/qb_icon.png" />
+    </div>
+
+    <div>
+        <button id="toggle-list" onclick="toggleList()">Toggle Friends List</button>
+        <ul id="friends-list" style="display:none;">
+            <li>Friend 1</li>
+            <li>Friend 2</li>
+            <li>Friend 3</li>
+        </ul>
+    </div>
 </div>

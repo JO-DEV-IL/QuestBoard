@@ -79,7 +79,7 @@
                             <li class="nav-item">
                                 @if (activeUser != null)
                                 {
-                                    <a class="btn btn-warning nav-link p-2" asp-page="/DungeonGates">Dungeon Run!</a>
+                                    <a class="btn-danger text-white nav-link p-2" asp-page="/DungeonGates">Dungeon Run!</a>
                                 }
                             </li>
                         </ul>
@@ -89,10 +89,12 @@
         }
     </header>
 
+    <button id="toggle-stats" class="btn-warning" onclick="toggleStats()" style="margin-left:20px">Show/Hide Stats</button>
 
     <div style="display:flex;">
-        <div style="margin-left:25px">
+        <div id="char-stats-partial" style="display:none;margin-left:20px" class="shadowed-border">
             @Html.Partial("_CharStats.cshtml")
+            <a class="btn btn-warning btn-sm" asp-page="/Users/Settings"><i class="fa fa-cog"></i></a>
         </div>
 
         <div class="content" style="text-align:center">

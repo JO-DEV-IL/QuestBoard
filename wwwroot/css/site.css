@@ -51,3 +51,12 @@ body {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
+.shadowed-border {
+    border: 2px solid #ddd;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 5px;
+    background-color: darkslategray;
+    color: navajowhite;
+}
