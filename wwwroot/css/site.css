@@ -1,9 +1,32 @@
+/*Imports*/
+
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+
+
+/*Global*/
+
+* {
+    font-family: MedievalSharp !important;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 html {
     font-size: 14px;
-    font-family: MedievalSharp;
+    position: relative;
+    min-height: 100%;
 }
+
+body {
+    margin-bottom: 60px;
+    background-image: url(https://i.ibb.co/Px1Yjxn/vintage-grungy-textured-paper-background.jpg);
+}
+
+
+
+/*Media Queries*/
 
 @media (min-width: 768px) {
     html {
@@ -11,30 +34,11 @@ html {
     }
 }
 
+
+/*Classes*/
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    margin-bottom: 60px;
-    font-family: MedievalSharp;
-    background-image: url(https://i.ibb.co/Px1Yjxn/vintage-grungy-textured-paper-background.jpg);
-    box-sizing: border-box;
-}
-
-#site_icon {
-    max-height: 35px;
-    margin-right: 15px;
-    margin-left: -5px;
-}
-
-#home_screen_icon {
-    height: 300px;
 }
 
 .content {
@@ -52,4 +56,18 @@ body {
     border-radius: 5px;
     background-color: #1C1C1C;
     color: navajowhite;
+}
+
+
+
+/*ID tags*/
+
+#site_icon {
+    max-height: 35px;
+    margin-right: 15px;
+    margin-left: -5px;
+}
+
+#home_screen_icon {
+    height: 300px;
 }
