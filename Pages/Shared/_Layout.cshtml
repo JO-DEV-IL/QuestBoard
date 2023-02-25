@@ -91,7 +91,7 @@
     </header>
 
     @*Show stat toggle button only on actual logged in pages*@
-    @if (Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Loading" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Login" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Create")
+    @if (Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Loading" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Login" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Create" && activeUser != null)
     {
         <button id="toggle-stats" class="btn-warning" onclick="toggleStats()">Show/Hide Stats</button>
     }

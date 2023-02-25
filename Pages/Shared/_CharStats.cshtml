@@ -1,5 +1,6 @@
 ﻿@using QuestBoard.Pages.SqlHelpers;
 
+@*Only show code under these conditions*@
 @if (ViewContext.HttpContext.Session.GetString("userActive") != null && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Login" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Create" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Loading")
 {
     SqlHelpers.GetStatsModel sqlHelper = new SqlHelpers.GetStatsModel();
