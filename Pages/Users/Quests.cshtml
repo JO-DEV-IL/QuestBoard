@@ -15,25 +15,54 @@
     <button type="submit" class="btn btn-primary">Post</button>
 </form>
 
-@*Display quest cards if they exist*@
+@*Display personal quest cards if they exist*@
 <div style="margin-top:25px">
     <div class="card-group">
         <div class="row">
             @foreach (var todo in Model.listUserQuests)
             {
-                <div class="col-sm-6">
-                    <div class="card text-white bg-dark mb-3" style="max-width: 18rem">
-                        @*<img src="~/images/scroll.jpg" class="card-img-top" alt="Quest Card">*@
-                        <div class="card-body">
-                            <h5 class="card-title">@todo.title</h5>
-                            <p class="card-text">@todo.description</p>
-                            <a href="#" class="btn btn-warning">View</a>
-                        </div>
-                        @*TODO: Format date to timezones*@
-                        <div class="card-footer"><small>@DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")</small></div>
+                <div class="w3-card-4">
+
+                    <header class="w3-container w3-light-grey">
+                        <h3>Personal Quest!</h3>
+                    </header>
+                    <div class="w3-container">
+                        <p>@todo.title</p>
+                        <hr>
+                        <img src="" alt="avatar" class="w3-left w3-circle">
+                        <p>@todo.description</p>
                     </div>
+
+                    <button class="w3-button w3-block w3-dark-grey">Button</button>
+
                 </div>
             }
+        </div>
+    </div>
+
+    @*New Quests from Questgivers*@
+    <div style="display:flex">
+        <div class="w3-card-4 w3-dark-grey">
+            <div class="w3-container w3-center">
+                <h3>New Quest Available!</h3>
+                <img src="~/images/avatar02.png" alt="Avatar" style="width:80%">
+                <h5>trash_gerblin</h5>
+
+                <button class="w3-button w3-green">Accept</button>
+                <button class="w3-button w3-blue">Read</button>
+                <button class="w3-button w3-red">Decline</button>
+            </div>
+        </div>
+        <div class="w3-card-4 w3-dark-grey">
+            <div class="w3-container w3-center">
+                <h3>New Quest Available!</h3>
+                <img src="~/images/avatar05.png" alt="Avatar" style="width:80%">
+                <h5>TestUser69</h5>
+
+                <button class="w3-button w3-green">Accept</button>
+                <button class="w3-button w3-blue">Read</button>
+                <button class="w3-button w3-red">Decline</button>
+            </div>
         </div>
     </div>
 </div>

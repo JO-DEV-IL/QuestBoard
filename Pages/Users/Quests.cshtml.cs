@@ -24,11 +24,11 @@ namespace QuestBoard.Pages.Users
                 {
                     connection.Open();
 
-                    String getQuests = "select q.username,q.todoTitle,q.todoDescription from [questboard_app].[dbo].[user_quests] q join [questboard_app].[dbo].[users] u on u.username = q.username where q.username = @username";
+                    String getQuests = "select q.username,q.todoTitle,q.todoDescription from [questboard_app].[dbo].[user_quests] q join [questboard_app].[dbo].[users] u on u.username = q.username where q.userID = @user";
 
                     using (SqlCommand command = new SqlCommand(getQuests, connection))
                     {
-                        command.Parameters.AddWithValue("@username", HttpContext.Session.GetString("userActive"));
+                        command.Parameters.AddWithValue("@user", HttpContext.Session.GetInt32("userID"));
                         command.ExecuteNonQuery();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -59,9 +59,9 @@ namespace QuestBoard.Pages.Users
                 {
                     connection.Open();
 
-                    using (SqlCommand command = new SqlCommand("INSERT INTO [questboard_app].[dbo].[user_quests] (username, todoTitle, todoDescription) VALUES (@username, @title, @description)", connection))
+                    using (SqlCommand command = new SqlCommand("INSERT INTO [questboard_app].[dbo].[user_quests] (username, todoTitle, todoDescription) VALUES (@user, @title, @description)", connection))
                     {
-                        command.Parameters.AddWithValue("@username", HttpContext.Session.GetString("userActive"));
+                        command.Parameters.AddWithValue("@user", HttpContext.Session.GetInt32("userID"));
                         command.Parameters.AddWithValue("@title", todoTitle);
                         command.Parameters.AddWithValue("@description", todoDescription);
                         command.ExecuteNonQuery();

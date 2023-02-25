@@ -10,11 +10,14 @@
     {
         <ul style="list-style:none">
 
-            <li>
-                <img style="height:110px" src="@sqlHelper.listUsersStats[0].portrait" alt="alt" />
+            @*Portrait*@
+            <li style="text-align:center">
+                <img style="height:110px;border: 2px solid white;margin-right:2rem" src="@sqlHelper.listUsersStats[0].portrait" alt="alt" />
                 <br />
             </li>
             <br />
+
+            @*Stats*@
             <li>
                 <b>Username:</b> @ViewContext.HttpContext.Session.GetString("userActive")
             </li>

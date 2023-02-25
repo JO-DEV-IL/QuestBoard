@@ -2,6 +2,7 @@
 
 html {
     font-size: 14px;
+    font-family: MedievalSharp;
 }
 
 @media (min-width: 768px) {
@@ -32,14 +33,6 @@ body {
     margin-left: -5px;
 }
 
-#navbar {
-    background-image: url(https://i.ibb.co/Px1Yjxn/vintage-grungy-textured-paper-background.jpg);
-}
-
-#userLoggedIn {
-    font: bold;
-}
-
 #home_screen_icon {
     height: 300px;
 }
@@ -55,8 +48,8 @@ body {
 .shadowed-border {
     border: 2px solid #ddd;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    padding: 15px;
+    padding: 25px;
     border-radius: 5px;
-    background-color: darkslategray;
+    background-color: #1C1C1C;
     color: navajowhite;
 }
