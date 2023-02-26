@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/QuestBoard.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 </head>
 <body>
     <header>
@@ -32,7 +32,7 @@
                 <div class="container">
                     <a class="navbar-brand">QuestBoard</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                            aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -98,7 +98,7 @@
     <div style="display:flex;">
         <div id="char-stats-partial" style="display:none" class="shadowed-border">
             @Html.Partial("_CharStats.cshtml")
-            <a class="btn btn-warning btn-sm" asp-page="/Users/Settings"><i class="fa fa-cog"></i></a>
+            <a class="btn btn-warning btn-sm" asp-page="/Users/Settings"><i class="fa-solid fa-cog"></i></a>
         </div>
 
         <div class="content" style="text-align:center">

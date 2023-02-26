@@ -24,7 +24,7 @@ namespace QuestBoard.Pages.Users
                 {
                     connection.Open();
 
-                    String getQuests = "select q.username,q.todoTitle,q.todoDescription from [questboard_app].[dbo].[user_quests] q join [questboard_app].[dbo].[users] u on u.username = q.username where q.userID = @user";
+                    String getQuests = "select q.userID,q.todoTitle,q.todoDescription from [questboard_app].[dbo].[user_quests] q join [questboard_app].[dbo].[users] u on u.userID = q.userID where q.userID = @user";
 
                     using (SqlCommand command = new SqlCommand(getQuests, connection))
                     {
@@ -59,7 +59,7 @@ namespace QuestBoard.Pages.Users
                 {
                     connection.Open();
 
-                    using (SqlCommand command = new SqlCommand("INSERT INTO [questboard_app].[dbo].[user_quests] (username, todoTitle, todoDescription) VALUES (@user, @title, @description)", connection))
+                    using (SqlCommand command = new SqlCommand("INSERT INTO [questboard_app].[dbo].[user_quests] (userID, todoTitle, todoDescription) VALUES (@user, @title, @description)", connection))
                     {
                         command.Parameters.AddWithValue("@user", HttpContext.Session.GetInt32("userID"));
                         command.Parameters.AddWithValue("@title", todoTitle);
