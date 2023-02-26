@@ -76,8 +76,11 @@
                             <li class="nav-item" style="color:darkred;font-weight:bolder">
                                 <a class="nav-link" asp-page="/Users?user=@activeUser">@activeUser</a>
                             </li>
+                            <li>
+                                <a class="nav-link" asp-page="/Tavern">The Tavern</a>
+                            </li>
                             <br />
-                            <li class="nav-item">
+                            <li class="nav-item" style="margin-left:10px">
                                 @if (activeUser != null)
                                 {
                                     <a class="btn-danger text-white nav-link p-2" asp-page="/DungeonGates">Dungeon Run!</a>
