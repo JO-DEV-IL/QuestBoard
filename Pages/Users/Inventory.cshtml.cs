@@ -26,7 +26,7 @@ namespace QuestBoard.Pages
 				{
 					connection.Open();
 
-					String getItems = "select i.itemName, i.itemQuantity, i.description, i.image_path from [questboard_app].[dbo].[user_inventory] i join [questboard_app].[dbo].[users] u on u.userID = i.userID where i.userID = @userID order by itemName";
+					String getItems = "";
 
 					using (SqlCommand command = new SqlCommand(getItems, connection))
 					{

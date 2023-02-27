@@ -16,7 +16,6 @@
 
     <br />
 
-    @*Alert for missing fields*@
     @if (Model.errorMessage.Length > 0)
     {
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -27,14 +26,12 @@
 
     <form method="post" style="width:700px">
         <div class="row mb-3">
-            @*Label not needed? Keeps fields properly aligned*@
             <label class="col-sm-3 col-form-label"></label>
             <div class="col-sm-6">
-                <input placeholder="Leeroy Jenkins, StudMuffin69, etc." type="text" class="form-control" name="username" value="@Model.userInfo.username" />
+                <input placeholder="Leeroy Jenkins, StudMuffin69, etc." type="text" class="form-control" name="username" value="@Model.userInfo.userName" />
             </div>
         </div>
         <div class="row mb-3">
-            @*Label not needed? Keeps fields properly aligned*@
             <label class="col-sm-3 col-form-label"></label>
             <div class="col-sm-6">
                 <input placeholder="Enter your password" type="password" class="form-control" name="password" value="@Model.userInfo.password" />

@@ -6,13 +6,10 @@ namespace QuestBoard.Pages.Users
 {
     public class CreateModel : PageModel
     {
-        // Global variable for Users Class
         public UserInfo userInfo = new UserInfo();
 
-        // Global success/error messages
         public String successMessage = "";
         public String errorMessage = "";
-
 
         public void OnGet()
         {
@@ -21,22 +18,16 @@ namespace QuestBoard.Pages.Users
 
         public void OnPost()
         {
-            // Grabs values from form POST request form
-            userInfo.username = Request.Form["username"];
+            userInfo.userName = Request.Form["userName"];
             userInfo.firstName = Request.Form["firstName"];
             userInfo.lastName = Request.Form["lastName"];
             userInfo.age = Request.Form["age"];
             userInfo.class_specialty = Request.Form["class_specialty"];
-            userInfo.role = Request.Form["role"];
             userInfo.password = Request.Form["password"];
 
-            // Validates all fields by checking if there is anything in those fields
-            if (userInfo.username.Length == 0 || userInfo.firstName.Length == 0 || userInfo.lastName.Length == 0 || userInfo.age.Length == 0 || userInfo.class_specialty.Length == 0 || userInfo.password.Length == 0)
+            if (userInfo.userName.Length == 0 || userInfo.firstName.Length == 0 || userInfo.lastName.Length == 0 || userInfo.age.Length == 0 || userInfo.class_specialty.Length == 0 || userInfo.password.Length == 0)
             {
-                // Error message becomes the following string
                 errorMessage = "All fields are required.";
-
-                // Return the message
                 return;
             }
             else
@@ -47,50 +38,47 @@ namespace QuestBoard.Pages.Users
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
                         connection.Open();
-                        
-                        // Not only does the statement use the field values, but it also sets equipment to empty simoltaneously
-                        String sql = "INSERT into [questboard_app].[dbo].[users] (username,firstName,lastName,age,class,level,role,password) VALUES(@username,@firstName,@lastName,@age,@class,@level,@role,@password); INSERT INTO [questboard_app].[dbo].[user_equipment] (head,chest,arms,legs,feet,mainhand,offhand,accessory1,accessory2) values ('Empty','Empty','Empty','Empty','Empty','Empty','Empty','Empty','Empty')";
+
+                        String sql = 
+                            // Handle user creation
+                            "INSERT into [questboard_app].[dbo].[master_Users] (userName, firstName, lastName, age, class, level, role, password)"
+                            + "VALUES (@userName, @firstName, @lastName, @age, @class, @level, @role, @password)"
+                            
+                            // Set user equips to default 0 (empty)
+                            + "INSERT INTO [questboard_app].[dbo].[user_Equipment] (head, shoulders, chest, hands, legs, feet, mainhand, offhand, accessory1, accessory2)"
+                            + "VALUES (0,0,0,0,0,0,0,0,0,0)";
 
                         using (SqlCommand command = new SqlCommand(sql, connection))
                         {
-                            // @ parameters in above sql query will be replaced with these userInfo values
-                            command.Parameters.AddWithValue("@username", userInfo.username);
+                            command.Parameters.AddWithValue("@userName", userInfo.userName);
                             command.Parameters.AddWithValue("@firstName", userInfo.firstName);
                             command.Parameters.AddWithValue("@lastName", userInfo.lastName);
                             command.Parameters.AddWithValue("@age", userInfo.age);
                             command.Parameters.AddWithValue("@class", userInfo.class_specialty);
                             command.Parameters.AddWithValue("@password", userInfo.password);
-
-                            // A newly created user's level is set to 1
+                            
                             command.Parameters.AddWithValue("@level", 1);
-
-                            // Always set to Member role unless otherwise specified
                             command.Parameters.AddWithValue("@role", "Member");
 
-                            // Execute query
                             command.ExecuteNonQuery();
                         }
 
-                        // Close connection
                         connection.Close();
                     }
                 }
                 catch (Exception ex)
                 {
-                    //errorMessage = ex.Message;
-                    //return;
                     Console.WriteLine(ex);
                 }
 
-                // Clear the fields
-                userInfo.username = "";
+                // Clear the fields after submit
+                userInfo.userName = "";
                 userInfo.firstName = "";
                 userInfo.lastName = "";
                 userInfo.age = "";
                 userInfo.class_specialty = "";
                 userInfo.password = "";
 
-                // Populate success message
                 successMessage = "User has been created!";
             }
         }

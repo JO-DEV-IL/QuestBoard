@@ -15,30 +15,19 @@
 						<th>Age</th>
 						<th>Class</th>
 						<th>Level</th>
-						<th>Role</th>
-						<th>Password</th>
 					</tr>
 				</thead>
 				<tbody>
-					@*Razer cshtml special character to symbolize switching from markup to code*@
-					@*For each item in the list, it creates a table with the following class tags*@
-					@*Edit/Delete buttons using id class tag from table*@
 					@foreach (var item in Model.listUsers)
 					{
 						<tr>
 							<td>@item.userID</td>
-							<td>@item.username</td>
+							<td>@item.userName</td>
 							<td>@item.firstName</td>
 							<td>@item.lastName</td>
 							<td>@item.age</td>
 							<td>@item.class_specialty</td>
 							<td>@item.level</td>
-							<td>@item.role</td>
-							<td>@item.password</td>
-							<td>
-								@*<a class="btn btn-primary btn-sm" href="/Users/Edit?id=@item.userID">Edit</a>
-								<a class="btn btn-danger btn-sm" href="/Users/Delete?id=@item.userID">Delete</a>*@
-							</td>
 						</tr>
 					}
 				</tbody>

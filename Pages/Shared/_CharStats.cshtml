@@ -3,9 +3,12 @@
 @*Only show code under these conditions*@
 @if (ViewContext.HttpContext.Session.GetString("userActive") != null && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Login" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Create" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Loading")
 {
+    string user = ViewContext.HttpContext.Session.GetInt32("userID").ToString();
+
     SqlHelpers.GetStatsModel sqlHelper = new SqlHelpers.GetStatsModel();
-    sqlHelper.GetStatsSQL(ViewContext.HttpContext.Session.GetInt32("userID").ToString());
-    sqlHelper.GetEquipmentSQL(ViewContext.HttpContext.Session.GetInt32("userID").ToString());
+    
+    sqlHelper.GetStatsSQL(user);
+    sqlHelper.GetEquipmentSQL(user);
 
     @foreach (var userStats in sqlHelper.listUsersStats)
     {
@@ -47,10 +50,10 @@
                 <b>Head:</b> @sqlHelper.listEquipment[0].head
             </li>
             <li>
-                <b>Chest:</b> @sqlHelper.listEquipment[0].chest
+                <b>Shoulders:</b> @sqlHelper.listEquipment[0].shoulders
             </li>
             <li>
-                <b>Arms:</b> @sqlHelper.listEquipment[0].arms
+                <b>Chest:</b> @sqlHelper.listEquipment[0].chest
             </li>
             <li>
                 <b>Legs:</b> @sqlHelper.listEquipment[0].legs

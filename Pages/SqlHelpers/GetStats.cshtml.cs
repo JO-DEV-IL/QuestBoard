@@ -10,20 +10,21 @@ namespace QuestBoard.Pages.SqlHelpers
     {
         public class UserStats
         {
+            public String portrait;
             public String level;
             public String class_specialty;
             public String hp;
             public String power;
             public String defense;
             public String luck;
-            public String portrait;
         }
 
         public class UserEquipment
         {
             public String head;
+            public String shoulders;
             public String chest;
-            public String arms;
+            public String hands;
             public String legs;
             public String feet;
             public String mainhand;
@@ -49,11 +50,12 @@ namespace QuestBoard.Pages.SqlHelpers
 
         public void GetStatsSQL(string user)
         {
-            string sql = "select s.userID,u.username,s.level,s.class,s.hp,s.power,s.defense,s.luck,s.avatar_path from [questboard_app].[dbo].[user_stats] s join [questboard_app].[dbo].[users] u on u.userID = s.userID where u.userID = @user";
-            using (SqlConnection connection = new SqlConnection("Data Source=JO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=FalseJO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            SqlConnection sqlConn = new SqlConnection("Data Source=JO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=FalseJO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            string sql = "select * from [questboard_app].[dbo].[user_Stats] where userID = @user";
+            using (sqlConn)
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(sql, connection))
+                sqlConn.Open();
+                using (SqlCommand command = new SqlCommand(sql, sqlConn))
                 {
                     command.Parameters.AddWithValue("@user", user);
                     command.ExecuteNonQuery();
@@ -62,29 +64,55 @@ namespace QuestBoard.Pages.SqlHelpers
                         while (reader.Read())
                         {
                             UserStats userStats = new UserStats();
+
+                            userStats.portrait = reader.GetString(1);
                             userStats.level = "" + reader.GetInt32(2);
                             userStats.class_specialty = reader.GetString(3);
                             userStats.hp = "" + reader.GetInt32(4);
                             userStats.power = "" + reader.GetInt32(5);
                             userStats.defense = "" + reader.GetInt32(6);
                             userStats.luck = "" + reader.GetInt32(7);
-                            userStats.portrait = reader.GetString(8);
 
                             listUsersStats.Add(userStats);
                         }
                     }
                 }
-                connection.Close();
+                sqlConn.Close();
             }
         }
 
         public void GetEquipmentSQL(string user)
         {
-            string sql = "select * from [questboard_app].[dbo].[user_equipment] where userID = @user";
-            using (SqlConnection connection = new SqlConnection("Data Source=JO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=FalseJO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            SqlConnection sqlConn = new SqlConnection("Data Source=JO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=FalseJO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            string sql =
+                "SELECT"
+                    + " u.userID,"
+                    + "a.name as Head,"
+                    + "b.name as Shoulders,"
+                    + "c.name as Chest,"
+                    + "d.name as Hands,"
+                    + "e.name as Legs,"
+                    + "f.name as Feet,"
+                    + "g.name as Mainhand,"
+                    + "h.name as Offhand,"
+                    + "i.name as Accessory1,"
+                    + "j.name as Accessory2"
+                + " FROM [questboard_app].[dbo].[user_Equipment] u"
+                    + " left join [questboard_app].[dbo].[master_Equipment] a on u.head = a.id"
+                    + " left join [questboard_app].[dbo].[master_Equipment] b on u.shoulders = b.id"
+                    + " left join [questboard_app].[dbo].[master_Equipment] c on u.chest = c.id"
+                    + " left join [questboard_app].[dbo].[master_Equipment] d on u.hands = d.id"
+                    + " left join [questboard_app].[dbo].[master_Equipment] e on u.legs = e.id"
+                    + " left join [questboard_app].[dbo].[master_Equipment] f on u.feet = f.id"
+                    + " left join [questboard_app].[dbo].[master_Equipment] g on u.mainhand = g.id"
+                    + " left join [questboard_app].[dbo].[master_Equipment] h on u.offhand = h.id"
+                    + " left join [questboard_app].[dbo].[master_Equipment] i on u.accessory1 = i.id"
+                    + " left join [questboard_app].[dbo].[master_Equipment] j on u.accessory2 = j.id"
+                + " WHERE u.userID = @user";
+            using (sqlConn)
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(sql, connection))
+                sqlConn.Open();
+                using (SqlCommand command = new SqlCommand(sql, sqlConn))
                 {
                     command.Parameters.AddWithValue("@user", user);
                     command.ExecuteNonQuery();
@@ -93,21 +121,23 @@ namespace QuestBoard.Pages.SqlHelpers
                         while (reader.Read())
                         {
                             UserEquipment userEquipment = new UserEquipment();
+
                             userEquipment.head = reader.GetString(1);
-                            userEquipment.chest = reader.GetString(2);
-                            userEquipment.arms = reader.GetString(3);
-                            userEquipment.legs = reader.GetString(4);
-                            userEquipment.feet = reader.GetString(5);
-                            userEquipment.mainhand = reader.GetString(6);
-                            userEquipment.offhand = reader.GetString(7);
-                            userEquipment.accessory1 = reader.GetString(8);
-                            userEquipment.accessory2 = reader.GetString(9);
+                            userEquipment.shoulders = reader.GetString(2);
+                            userEquipment.chest = reader.GetString(3);
+                            userEquipment.hands = reader.GetString(4);
+                            userEquipment.legs = reader.GetString(5);
+                            userEquipment.feet = reader.GetString(6);
+                            userEquipment.mainhand = reader.GetString(7);
+                            userEquipment.offhand = reader.GetString(8);
+                            userEquipment.accessory1 = reader.GetString(9);
+                            userEquipment.accessory2 = reader.GetString(10);
 
                             listEquipment.Add(userEquipment);
                         }
                     }
                 }
-                connection.Close();
+                sqlConn.Close();
             }
         }
     }
