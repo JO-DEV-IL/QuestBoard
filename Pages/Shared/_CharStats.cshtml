@@ -1,78 +1,69 @@
 ﻿@using QuestBoard.Pages.SqlHelpers;
 
-@*Only show code under these conditions*@
-@if (ViewContext.HttpContext.Session.GetString("userActive") != null && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Login" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Create" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Loading")
-{
-    string user = ViewContext.HttpContext.Session.GetInt32("userID").ToString();
+@{
+    string user = ViewContext.HttpContext.Session.GetInt32("userID").ToString(); // returns userID as a string
 
     SqlHelpers.GetStatsModel sqlHelper = new SqlHelpers.GetStatsModel();
-    
-    sqlHelper.GetStatsSQL(user);
-    sqlHelper.GetEquipmentSQL(user);
+    sqlHelper.GetStatsSQL(ViewContext.HttpContext.Session.GetInt32("userID").ToString());
+    sqlHelper.GetEquipmentSQL(ViewContext.HttpContext.Session.GetInt32("userID").ToString());
+}
 
-    @foreach (var userStats in sqlHelper.listUsersStats)
-    {
-        <ul style="list-style:none">
+@foreach (var userStats in sqlHelper.listUsersStats)
+{
+    <ul style="list-style:none">
+        <li style="text-align:center">
+            <img style="height:110px;border: 2px solid white;margin-right:2rem" src="/images/avatars/@sqlHelper.listUsersStats[0].portrait" alt="alt" />
+        </li>
+        <li>
+            <b>Level:</b> @sqlHelper.listUsersStats[0].level
+        </li>
+        <li>
+            <b>Class:</b> @sqlHelper.listUsersStats[0].class_specialty
+        </li>
+        <li>
+            <b>HP:</b> @sqlHelper.listUsersStats[0].hp
+        </li>
+        <li>
+            <b>Power:</b> @sqlHelper.listUsersStats[0].power
+        </li>
+        <li>
+            <b>Defense:</b> @sqlHelper.listUsersStats[0].defense
+        </li>
+        <li>
+            <b>Luck:</b> @sqlHelper.listUsersStats[0].luck
+        </li>
+    </ul>
+}
 
-            @*Portrait*@
-            <li style="text-align:center">
-                <img style="height:110px;border: 2px solid white;margin-right:2rem" src="/images/avatars/@sqlHelper.listUsersStats[0].portrait" alt="alt" />
-                <br />
-            </li>
-            <br />
-
-            @*Stats*@
-            <li>
-                <b>Username:</b> @ViewContext.HttpContext.Session.GetString("userActive")
-            </li>
-            <li>
-                <b>Level:</b> @sqlHelper.listUsersStats[0].level
-            </li>
-            <li>
-                <b>Class:</b> @sqlHelper.listUsersStats[0].class_specialty
-            </li>
-            <li>
-                <b>HP:</b> @sqlHelper.listUsersStats[0].hp
-            </li>
-            <li>
-                <b>Power:</b> @sqlHelper.listUsersStats[0].power
-            </li>
-            <li>
-                <b>Defense:</b> @sqlHelper.listUsersStats[0].defense
-            </li>
-            <li>
-                <b>Luck:</b> @sqlHelper.listUsersStats[0].luck
-            </li>
-            <br />
-
-            @*Equipment*@
-            <li>
-                <b>Head:</b> @sqlHelper.listEquipment[0].head
-            </li>
-            <li>
-                <b>Shoulders:</b> @sqlHelper.listEquipment[0].shoulders
-            </li>
-            <li>
-                <b>Chest:</b> @sqlHelper.listEquipment[0].chest
-            </li>
-            <li>
-                <b>Legs:</b> @sqlHelper.listEquipment[0].legs
-            </li>
-            <li>
-                <b>Feet:</b> @sqlHelper.listEquipment[0].feet
-            </li>
-            <li>
-                <b>Mainhand:</b> @sqlHelper.listEquipment[0].mainhand
-            </li>
-            <li>
-                <b>Offhand:</b> @sqlHelper.listEquipment[0].offhand
-            </li>
-            <li>
-                <b>Accessory:</b> @sqlHelper.listEquipment[0].accessory1
-            </li>
-            <li>
-                <b>Accessory:</b> @sqlHelper.listEquipment[0].accessory2
-            </li>
-        </ul>
-    }
+@foreach (var userEquipment in sqlHelper.listEquipment)
+{
+    <ul style="list-style:none">
+        <li>
+            <b>Head: @sqlHelper.listEquipment[0].head</b>
+        </li>
+        <li>
+            <b>Shoulders: @sqlHelper.listEquipment[0].shoulders</b>
+        </li>
+        <li>
+            <b>Chest: @sqlHelper.listEquipment[0].chest</b>
+        </li>
+        <li>
+            <b>Legs: @sqlHelper.listEquipment[0].legs</b>
+        </li>
+        <li>
+            <b>Feet: @sqlHelper.listEquipment[0].feet</b>
+        </li>
+        <li>
+            <b>Mainhand: @sqlHelper.listEquipment[0].mainhand</b>
+        </li>
+        <li>
+            <b>Offhand: @sqlHelper.listEquipment[0].offhand</b>
+        </li>
+        <li>
+            <b>Accessory: @sqlHelper.listEquipment[0].accessory1</b>
+        </li>
+        <li>
+            <b>Accessory: @sqlHelper.listEquipment[0].accessory2</b>
+        </li>
+    </ul>
 }

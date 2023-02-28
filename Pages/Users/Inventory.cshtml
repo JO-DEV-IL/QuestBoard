@@ -1,6 +1,7 @@
 ﻿@page
 @model QuestBoard.Pages.InventoryModel
 @{
+
 }
 
 <table class="table table-striped m-auto table-hover">
@@ -10,7 +11,8 @@
 			<tr>
 				<td>@item.name</td>
 				<td>@item.quantity</td>
-				<td><img style="height:30px" src="@item.image_path" alt="alt" /></td>
+				<td>@item.rarity</td>
+				<td><img style="height:30px" src="@item.image" alt="alt" /></td>
 				<td><a class="btn btn-warning btn-sm" href="/ViewItem/Show?item=@item.name">View</a></td>
 			</tr>
 		}
