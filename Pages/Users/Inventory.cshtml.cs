@@ -31,17 +31,18 @@ namespace QuestBoard.Pages
                     connection.Open();
 
                     String getItems =
-                        "DECLARE @user int;" +
-                        "DECLARE @sql nvarchar(max);" +
-                        "SET @sql = 'SELECT M.name, I.quantity, M.rarity, M.image FROM user_Inventory I LEFT JOIN ' + QUOTENAME(@tableName) + ' M ON I.itemID = M.id WHERE userID = @user';" +
-                        "EXEC sp_executesql @sql";
-
+                        "DECLARE @sql nvarchar(max);"
+                        + "DECLARE @user int = @userID;"
+                        + "DECLARE @tableName varchar(max) = @table;"
+                        + " SET @sql = 'SELECT M.name, I.quantity, M.rarity, M.image FROM user_Inventory I LEFT JOIN ' + QUOTENAME(@tableName) + ' M ON I.itemID = M.id WHERE userID = @user';"
+                        + " EXEC sp_executesql @sql";
+                    
                     using (SqlCommand command = new SqlCommand(getItems, connection))
                     {
                         Console.WriteLine(user);
-                        command.Parameters.Clear(); // clear any existing parameters
-                        command.Parameters.AddWithValue("@user", user);
-                        command.Parameters.AddWithValue("@tableName", "master_Misc_Items");
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("@userID", user);
+                        command.Parameters.AddWithValue("@table", "master_Misc_Items");
                         command.ExecuteNonQuery();
 
                         using (SqlDataReader reader = command.ExecuteReader())
