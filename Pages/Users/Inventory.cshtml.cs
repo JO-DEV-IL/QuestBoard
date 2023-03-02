@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using QuestBoard.Pages.Users;
 using System.Data.SqlClient;
+using System.Security.Cryptography.X509Certificates;
 
 namespace QuestBoard.Pages
 {
@@ -31,19 +32,20 @@ namespace QuestBoard.Pages
                     connection.Open();
 
                     String getItems =
-                        "DECLARE @sql nvarchar(max);"
-                        + "DECLARE @user int = @userID;"
-                        + "DECLARE @tableName varchar(max) = @table;"
-                        + " SET @sql = 'SELECT M.name, I.quantity, M.rarity, M.image FROM user_Inventory I LEFT JOIN ' + QUOTENAME(@tableName) + ' M ON I.itemID = M.id WHERE userID = @user';"
-                        + " EXEC sp_executesql @sql";
-                    
+                        "SELECT I.itemID, M.name, M.rarity, M.image, I.quantity"
+                        + " FROM [questboard_app].[dbo].[user_Inventory] I"
+                        + " INNER JOIN [questboard_app].[dbo].[master_Misc_Items] M ON I.itemID = M.id"
+                        + " WHERE I.userID = @user"
+                        + " UNION ALL"
+                        + " SELECT I.itemId, M.name, M.rarity, M.image, I.quantity"
+                        + " FROM [questboard_app].[dbo].[user_Inventory] I"
+                        + " INNER JOIN [questboard_app].[dbo].[master_Equipment] M ON I.itemID = M.id"
+                        + " WHERE I.userID = @user";
+
+
                     using (SqlCommand command = new SqlCommand(getItems, connection))
                     {
-                        Console.WriteLine(user);
-                        command.Parameters.Clear();
-                        command.Parameters.AddWithValue("@userID", user);
-                        command.Parameters.AddWithValue("@table", "master_Misc_Items");
-                        command.ExecuteNonQuery();
+                        command.Parameters.AddWithValue("@user", user);
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -51,10 +53,10 @@ namespace QuestBoard.Pages
                             {
                                 UserItems userItems = new UserItems();
 
-                                userItems.name = reader.GetString(0);
-                                userItems.quantity = "" + reader.GetInt32(1);
+                                userItems.name = reader.GetString(1);
                                 userItems.rarity = reader.GetString(2);
                                 userItems.image = reader.GetString(3);
+                                userItems.quantity = reader.GetInt32(4).ToString();
 
                                 listUsersItems.Add(userItems);
                             }
