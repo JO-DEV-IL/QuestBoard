@@ -8,7 +8,6 @@
 <div>
     <h2>@itemQ</h2>
 
-    @*Success/error messages for chest opening*@
     @if (Model.errorMessage.Length > 0)
     {
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -20,10 +19,12 @@
     @foreach (var item in Model.listUsersItems)
     {
         <p>Quantity: @item.quantity</p>
-        <p>@item.description</p>
-        <p><img style="height:200px;" src="@item.image_path" alt="alt" /></p>
+        <p>Rarity: @item.rarity</p>
 
-        if (itemQ == "Rusty Key")
+        <p>@item.description</p>
+        <p><img style="height:200px;" src="~/images/@item.image" alt="alt" /></p>
+
+        @*if (itemQ == "Rusty Key")
         {
             <form asp-page-handler="open" method="post">
                 <button class="btn btn-warning">Use Key</button>
@@ -40,7 +41,7 @@
                     <button class="btn btn-outline-danger">Unequip</button>
                 </form>
             </div>
-        }
+        }*@
     }
 
     @if (Model.successMessage.Length > 0)

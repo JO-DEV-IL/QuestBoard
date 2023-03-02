@@ -17,13 +17,13 @@ namespace QuestBoard.Pages.Users
 				{
 					connection.Open();
 
-					String update = "UPDATE [questboard_app].[dbo].[users] SET is_loggedin = 0 WHERE username = @username";
+					String update = "UPDATE [questboard_app].[dbo].[master_Users] SET is_active = 0 WHERE id = @user";
 
 					using (SqlCommand updateUser = new SqlCommand(update, connection))
 					{
 						if(HttpContext.Session.GetString("userActive") != null)
 						{
-							updateUser.Parameters.AddWithValue("@username", HttpContext.Session.GetString("userActive"));
+							updateUser.Parameters.AddWithValue("@user", HttpContext.Session.GetInt32("userID").ToString());
 							updateUser.ExecuteNonQuery();
 						}
 					}
