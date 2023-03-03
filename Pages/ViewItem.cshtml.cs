@@ -63,6 +63,8 @@ namespace QuestBoard.Pages
 
         public void OnPost()
         {
+            string userID = HttpContext.Session.GetInt32("userID").ToString();
+
             if (Request.Query["handler"].ToString() == "open")
             {
                 OpenChest();
