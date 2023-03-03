@@ -24,13 +24,7 @@
         <p>@item.description</p>
         <p><img style="height:200px;" src="~/images/@item.image" alt="alt" /></p>
 
-        @*if (itemQ == "Rusty Key")
-        {
-            <form asp-page-handler="open" method="post">
-                <button class="btn btn-warning">Use Key</button>
-            </form>
-        }
-        else if (@item.type == "Armor" || @item.type == "Weapon")
+        @if (item.equipable)
         {
             <div style="display:flex;justify-content:space-between">
                 <form asp-page-handler="equip" method="post">
@@ -41,7 +35,7 @@
                     <button class="btn btn-outline-danger">Unequip</button>
                 </form>
             </div>
-        }*@
+        }
     }
 
     @if (Model.successMessage.Length > 0)

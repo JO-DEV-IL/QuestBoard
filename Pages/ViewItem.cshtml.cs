@@ -6,181 +6,158 @@ using System.Data.SqlClient;
 
 namespace QuestBoard.Pages
 {
-	public class ViewItemModel : PageModel
-	{
-		public String successMessage = "";
-		public String errorMessage = "";
+    public class ViewItemModel : PageModel
+    {
+        public String successMessage = "";
+        public String errorMessage = "";
 
-		public class UserItems
-		{
-			public String name;
-			public String quantity;
-			public String rarity;
-			public String description;
-			public String image;
-		}
-		public List<UserItems> listUsersItems = new List<UserItems>();
+        public String connectionString = "Data Source=JO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=FalseLAPTOP-14G24561\\\\LOCALHOST;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-		public void OnGet()
-		{
-			try
-			{
-				String connectionString = "Data Source=JO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=FalseLAPTOP-14G24561\\LOCALHOST;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-				using (SqlConnection connection = new SqlConnection(connectionString))
-				{
-					connection.Open();
+        public class UserItems
+        {
+            public String name;
+            public String quantity;
+            public String rarity;
+            public String description;
+            public String image;
+            public bool equipable;
+        }
+        public List<UserItems> listUsersItems = new List<UserItems>();
 
-					String getItems =
-						"SELECT M.name, M.description, M.rarity, M.image, I.quantity"
-						+ " FROM [questboard_app].[dbo].[user_Inventory] I"
-						+ " INNER JOIN [questboard_app].[dbo].[master_Misc_Items] M ON I.itemID = M.id"
-						+ " WHERE M.name = @itemName"
-						+ " UNION ALL"
-						+ " SELECT M.name, M.description, M.rarity, M.image, I.quantity"
-						+ " FROM [questboard_app].[dbo].[user_Inventory] I"
-						+ " INNER JOIN [questboard_app].[dbo].[master_Equipment] M ON I.itemID = M.id"
-						+ " WHERE M.name = @itemName";
+        public void OnGet()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("[questboard_app].[dbo].[qb_master_Proc]", connection);
+                command.CommandType = CommandType.StoredProcedure;
 
-					using (SqlCommand command = new SqlCommand(getItems, connection))
-					{
-						command.Parameters.AddWithValue("@itemName", HttpContext.Request.Query["item"].ToString());
-						
-						using (SqlDataReader reader = command.ExecuteReader())
-						{
-							while (reader.Read())
-							{
-								UserItems userItems = new UserItems();
-								
-								userItems.name = reader.GetString(0);
-                                userItems.description = reader.GetString(1);
-                                userItems.rarity = reader.GetString(2);
-                                userItems.image = reader.GetString(3);
-                                userItems.quantity = reader.GetInt32(4).ToString();
+                SqlParameter itemName = new SqlParameter("@itemName", SqlDbType.VarChar, 50);
+                itemName.Value = HttpContext.Request.Query["item"].ToString();
+                command.Parameters.Add(itemName);
 
-                                listUsersItems.Add(userItems);
-							}
-						}
-					}
-					connection.Close();
-				}
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex);
-			}
-		}
+                SqlParameter optionName = new SqlParameter("@Option", SqlDbType.VarChar, 50);
+                optionName.Value = "GetItems";
+                command.Parameters.Add(optionName);
 
-		public void OnPost()
-		{
-			if (Request.Query["handler"].ToString() == "open")
-			{
-				OpenChest();
-			}
-			else if (Request.Query["handler"].ToString() == "equip")
-			{
-				Equip();
-				Response.Redirect("/Users/Inventory");
-			}
-			else if (Request.Query["handler"].ToString() == "unequip")
-			{
-				Unequip();
-				Response.Redirect("/Users/Inventory");
-			}
-		}
+                connection.Open();
 
-		public void OpenChest()
-		{
-			try
-			{
-				String connectionString = "Data Source=JO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=FalseLAPTOP-14G24561\\LOCALHOST;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        UserItems userItems = new UserItems();
 
-				using (SqlConnection connection = new SqlConnection(connectionString))
-				{
-					connection.Open();
+                        userItems.name = reader.GetString(0);
+                        userItems.description = reader.GetString(1);
+                        userItems.rarity = reader.GetString(2);
+                        userItems.image = reader.GetString(3);
+                        userItems.quantity = reader.GetInt32(4).ToString();
+                        userItems.equipable = reader.GetBoolean(5);
 
-					SqlCommand command = new SqlCommand("[questboard_app].[dbo].[open_chest]", connection);
-					command.CommandType = CommandType.StoredProcedure;
+                        listUsersItems.Add(userItems);
+                    }
+                }
+                connection.Close();
+            }
+        }
 
-					command.Parameters.AddWithValue("@userID", HttpContext.Session.GetInt32("userID"));
+        public void OnPost()
+        {
+            if (Request.Query["handler"].ToString() == "open")
+            {
+                OpenChest();
+            }
+            else if (Request.Query["handler"].ToString() == "equip")
+            {
+                Equip();
+                Response.Redirect("/Users/Inventory");
+            }
+            else if (Request.Query["handler"].ToString() == "unequip")
+            {
+                Unequip();
+                Response.Redirect("/Users/Inventory");
+            }
+        }
+        public void OpenChest()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("[questboard_app].[dbo].[qb_master_Proc]", connection);
+                command.CommandType = CommandType.StoredProcedure;
 
-					// Add output parameters
-					SqlParameter lootName = new SqlParameter("@lootName", SqlDbType.VarChar, 20);
-					lootName.Direction = ParameterDirection.Output;
-					command.Parameters.Add(lootName);
+                SqlParameter itemName = new SqlParameter("@itemName", SqlDbType.VarChar, 50);
+                itemName.Value = HttpContext.Request.Query["item"].ToString();
+                command.Parameters.Add(itemName);
 
-					SqlParameter quantity = new SqlParameter("@quantity", SqlDbType.Int);
-					quantity.Direction = ParameterDirection.Output;
-					command.Parameters.Add(quantity);
+                SqlParameter optionName = new SqlParameter("@Option", SqlDbType.VarChar, 50);
+                optionName.Value = "GetItems";
+                command.Parameters.Add(optionName);
 
-					command.ExecuteNonQuery();
+                connection.Open();
 
-					// Get the values of the output parameters after executing the stored procedure
-					string obtainedLootName = (string)lootName.Value;
-					int obtainedQuantity = (int)quantity.Value;
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        UserItems userItems = new UserItems();
 
-					successMessage = "Chest was opened successfully! " + obtainedLootName + " x" + obtainedQuantity + " have been added to your inventory.";
+                        userItems.name = reader.GetString(0);
+                        userItems.description = reader.GetString(1);
+                        userItems.rarity = reader.GetString(2);
+                        userItems.image = reader.GetString(3);
+                        userItems.quantity = reader.GetInt32(4).ToString();
 
-					connection.Close();
-				}
-			}
-			catch (Exception ex)
-			{
-				errorMessage = "Chest did not open!";
-				Console.WriteLine(ex);
-			}
-		}
-		public void Equip()
-		{
-			try
-			{
-				String connectionString = "Data Source=JO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=FalseLAPTOP-14G24561\\LOCALHOST;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                        listUsersItems.Add(userItems);
+                    }
+                }
+                connection.Close();
+            }
+        }
+        public void Equip()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("[questboard_app].[dbo].[qb_master_Proc]", connection);
+                command.CommandType = CommandType.StoredProcedure;
 
-				using (SqlConnection connection = new SqlConnection(connectionString))
-				{
-					connection.Open();
+                SqlParameter itemName = new SqlParameter("@itemName", SqlDbType.VarChar, 50);
+                itemName.Value = HttpContext.Session.GetString("SelectedItem");
+                command.Parameters.Add(itemName);
 
-					SqlCommand command = new SqlCommand("[questboard_app].[dbo].[equip_item]", connection);
-					command.CommandType = CommandType.StoredProcedure;
+                SqlParameter user = new SqlParameter("@user", SqlDbType.Int);
+                user.Value = HttpContext.Session.GetInt32("userID");
+                command.Parameters.Add(user);
 
-					command.Parameters.AddWithValue("@userID", HttpContext.Session.GetInt32("userID"));
-					command.Parameters.AddWithValue("@item", HttpContext.Session.GetString("SelectedItem"));
+                SqlParameter optionName = new SqlParameter("@Option", SqlDbType.VarChar, 50);
+                optionName.Value = "Equip";
+                command.Parameters.Add(optionName);
 
-					command.ExecuteNonQuery();
+                connection.Open();
+                connection.Close();
+            }
+        }
+        public void Unequip()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("[questboard_app].[dbo].[qb_master_Proc]", connection);
+                command.CommandType = CommandType.StoredProcedure;
 
-					connection.Close();
-				}
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex);
-			}
-		}
+                SqlParameter itemName = new SqlParameter("@itemName", SqlDbType.VarChar, 50);
+                itemName.Value = HttpContext.Session.GetString("SelectedItem");
+                command.Parameters.Add(itemName);
 
-		public void Unequip()
-		{
-			try
-			{
-				String connectionString = "Data Source=JO-DEV-IL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=FalseLAPTOP-14G24561\\LOCALHOST;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                SqlParameter user = new SqlParameter("@user", SqlDbType.Int);
+                user.Value = HttpContext.Session.GetInt32("userID");
+                command.Parameters.Add(user);
 
-				using (SqlConnection connection = new SqlConnection(connectionString))
-				{
-					connection.Open();
+                SqlParameter optionName = new SqlParameter("@Option", SqlDbType.VarChar, 50);
+                optionName.Value = "Unequip";
+                command.Parameters.Add(optionName);
 
-					SqlCommand command = new SqlCommand("[questboard_app].[dbo].[unequip_item]", connection);
-					command.CommandType = CommandType.StoredProcedure;
-
-					command.Parameters.AddWithValue("@userID", HttpContext.Session.GetInt32("userID"));
-					command.Parameters.AddWithValue("@item", HttpContext.Session.GetString("SelectedItem"));
-
-					command.ExecuteNonQuery();
-
-					connection.Close();
-				}
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex);
-			}
-		}
-	}
+                connection.Open();
+                connection.Close();
+            }
+        }
+    }
 }
