@@ -45,33 +45,36 @@ namespace QuestBoard.Pages.SqlHelpers
 
         public void GetStatsSQL(int user)
         {
-            String sql = "select * from [questboard_app].[dbo].[user_Stats] where userID = @user";
-
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                SqlCommand command = new SqlCommand("[questboard_app].[dbo].[qb_master_Proc]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter userID = new SqlParameter("@user", SqlDbType.Int);
+                userID.Value = user;
+                command.Parameters.Add(userID);
+
+                SqlParameter optionName = new SqlParameter("@Option", SqlDbType.VarChar, 50);
+                optionName.Value = "sql_ViewStats";
+                command.Parameters.Add(optionName);
+
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand(sql, connection))
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    command.Parameters.AddWithValue("@user", user);
-                    command.ExecuteNonQuery();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
-                        {
-                            UserStats userStats = new UserStats();
+                        UserStats userStats = new UserStats();
 
-                            userStats.portrait = reader.GetString(1);
-                            userStats.level = "" + reader.GetInt32(2);
-                            userStats.class_specialty = reader.GetString(3);
-                            userStats.hp = "" + reader.GetInt32(4);
-                            userStats.power = "" + reader.GetInt32(5);
-                            userStats.defense = "" + reader.GetInt32(6);
-                            userStats.luck = "" + reader.GetInt32(7);
+                        userStats.portrait = reader.GetString(1);
+                        userStats.level = "" + reader.GetInt32(2);
+                        userStats.class_specialty = reader.GetString(3);
+                        userStats.hp = "" + reader.GetInt32(4);
+                        userStats.power = "" + reader.GetInt32(5);
+                        userStats.defense = "" + reader.GetInt32(6);
+                        userStats.luck = "" + reader.GetInt32(7);
 
-                            listUsersStats.Add(userStats);
-                        }
+                        listUsersStats.Add(userStats);
                     }
                 }
                 connection.Close();
