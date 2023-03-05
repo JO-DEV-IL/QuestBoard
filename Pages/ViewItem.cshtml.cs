@@ -63,11 +63,7 @@ namespace QuestBoard.Pages
 
         public void OnPost()
         {
-            if (Request.Query["handler"].ToString() == "open")
-            {
-                //OpenChest();
-            }
-            else if (Request.Query["handler"].ToString() == "equip")
+            if (Request.Query["handler"].ToString() == "equip")
             {
                 Equip();
                 Response.Redirect("/Users/Inventory");
@@ -98,6 +94,7 @@ namespace QuestBoard.Pages
                 command.Parameters.Add(optionName);
 
                 connection.Open();
+                command.ExecuteNonQuery();
                 connection.Close();
             }
         }
@@ -121,6 +118,7 @@ namespace QuestBoard.Pages
                 command.Parameters.Add(optionName);
 
                 connection.Open();
+                command.ExecuteNonQuery();
                 connection.Close();
             }
         }
