@@ -78,41 +78,6 @@ namespace QuestBoard.Pages
                 Response.Redirect("/Users/Inventory");
             }
         }
-        //public void OpenChest()
-        //{
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        SqlCommand command = new SqlCommand("[questboard_app].[dbo].[qb_master_Proc]", connection);
-        //        command.CommandType = CommandType.StoredProcedure;
-
-        //        SqlParameter itemName = new SqlParameter("@itemName", SqlDbType.VarChar, 50);
-        //        itemName.Value = HttpContext.Request.Query["item"].ToString();
-        //        command.Parameters.Add(itemName);
-
-        //        SqlParameter optionName = new SqlParameter("@Option", SqlDbType.VarChar, 50);
-        //        optionName.Value = "sql_OpenChest";
-        //        command.Parameters.Add(optionName);
-
-        //        connection.Open();
-
-        //        using (SqlDataReader reader = command.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                UserItems userItems = new UserItems();
-
-        //                userItems.name = reader.GetString(0);
-        //                userItems.description = reader.GetString(1);
-        //                userItems.rarity = reader.GetString(2);
-        //                userItems.image = reader.GetString(3);
-        //                userItems.quantity = reader.GetInt32(4).ToString();
-
-        //                listUsersItems.Add(userItems);
-        //            }
-        //        }
-        //        connection.Close();
-        //    }
-        //}
         public void Equip()
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -124,8 +89,8 @@ namespace QuestBoard.Pages
                 itemName.Value = HttpContext.Session.GetString("SelectedItem");
                 command.Parameters.Add(itemName);
 
-                SqlParameter user = new SqlParameter("@user", SqlDbType.VarChar, 50);
-                user.Value = HttpContext.Session.GetInt32("userID").ToString();
+                SqlParameter user = new SqlParameter("@user", SqlDbType.Int);
+                user.Value = HttpContext.Session.GetInt32("userID");
                 command.Parameters.Add(user);
 
                 SqlParameter optionName = new SqlParameter("@Option", SqlDbType.VarChar, 50);

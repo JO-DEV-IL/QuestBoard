@@ -1,11 +1,14 @@
 ﻿@using QuestBoard.Pages.SqlHelpers;
 
 @{
-    string user = ViewContext.HttpContext.Session.GetInt32("userID").ToString(); // returns userID as a string
-
+    int? user = ViewContext.HttpContext.Session.GetInt32("userID");
     SqlHelpers.GetStatsModel sqlHelper = new SqlHelpers.GetStatsModel();
-    sqlHelper.GetStatsSQL(ViewContext.HttpContext.Session.GetInt32("userID").ToString());
-    sqlHelper.GetEquipmentSQL(ViewContext.HttpContext.Session.GetInt32("userID").ToString());
+
+    if (user != null)
+    {
+        sqlHelper.GetStatsSQL(user.Value);
+        sqlHelper.GetEquipmentSQL(user.Value);
+    }
 }
 
 @foreach (var userStats in sqlHelper.listUsersStats)

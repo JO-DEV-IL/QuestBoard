@@ -41,13 +41,11 @@ namespace QuestBoard.Pages.SqlHelpers
 
         public void OnGet()
         {
-            GetStatsSQL();
-            GetEquipmentSQL();
         }
 
-        public void GetStatsSQL()
+        public void GetStatsSQL(int user)
         {
-            String sql = "select * from [questboard_app].[dbo].[user_Stats]";
+            String sql = "select * from [questboard_app].[dbo].[user_Stats] where userID = @user";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -55,7 +53,7 @@ namespace QuestBoard.Pages.SqlHelpers
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-                    command.Parameters.AddWithValue("@user", HttpContext.Session.GetInt32("userID").ToString());
+                    command.Parameters.AddWithValue("@user", user);
                     command.ExecuteNonQuery();
 
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -76,20 +74,20 @@ namespace QuestBoard.Pages.SqlHelpers
                         }
                     }
                 }
-                sqlConn.Close();
+                connection.Close();
             }
         }
 
-        public void GetEquipmentSQL()
+        public void GetEquipmentSQL(int user)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand("[questboard_app].[dbo].[qb_master_Proc]", connection);
                 command.CommandType = CommandType.StoredProcedure;
 
-                SqlParameter user = new SqlParameter("@user", SqlDbType.VarChar, 50);
-                user.Value = HttpContext.Session.GetInt32("userID").ToString();
-                command.Parameters.Add(user);
+                SqlParameter userID = new SqlParameter("@user", SqlDbType.Int);
+                userID.Value = user;
+                command.Parameters.Add(userID);
 
                 SqlParameter optionName = new SqlParameter("@Option", SqlDbType.VarChar, 50);
                 optionName.Value = "sql_ViewEquipment";
