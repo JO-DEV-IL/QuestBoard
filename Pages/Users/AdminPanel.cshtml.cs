@@ -15,7 +15,7 @@ namespace QuestBoard.Pages.Users
         public String password;
     }
 
-    public class IndexModel : PageModel
+    public class AdminPanelModel : PageModel
     {
         public List<UserInfo> listUsers = new List<UserInfo>();
 
@@ -28,7 +28,7 @@ namespace QuestBoard.Pages.Users
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "SELECT userID, userName, firstName, lastName, age, class, level, role FROM [questboard_app].[dbo].[master_Users]";
+                    String sql = "SELECT * FROM [questboard_app].[dbo].[master_Users]";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
