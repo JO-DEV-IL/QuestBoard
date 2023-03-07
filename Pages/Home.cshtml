@@ -4,26 +4,13 @@
     String user = ViewContext.HttpContext.Session.GetString("userActive");
 }
 
-@section Scripts{
-    <script>
-        function toggleList() {
-            const list = document.getElementById("friends-list");
-            if (list.style.display === "none") {
-                list.style.display = "block";
-            } else {
-                list.style.display = "none";
-            }
-        }
-    </script>
-}
-
 <div style="display:flex">
     <div>
         @if (user != null)
         {
             <h1>Welcome, @user.</h1>
         }
-
+        <br />
         <img id="home_screen_icon" src="~/images/qb_icon.png" />
     </div>
 </div>

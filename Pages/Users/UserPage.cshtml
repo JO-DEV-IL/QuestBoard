@@ -3,13 +3,69 @@
 @{
 }
 
-<h1>User Page</h1>
+@section Scripts{
+    <script>
+        function toggleList() {
+            const list = document.getElementById("friends-list");
+            if (list.style.display === "none") {
+                list.style.display = "block";
+            } else {
+                list.style.display = "none";
+            }
+        }
+    </script>
+}
+<style>
+    .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        height: 200px;
+    }
 
-<div>
-    <button id="toggle-list" onclick="toggleList()">Toggle Friends List</button>
-    <ul id="friends-list" style="display:none;">
-        <li>Friend 1</li>
-        <li>Friend 2</li>
-        <li>Friend 3</li>
-    </ul>
+    .col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 40%;
+        height: 100%;
+        border: 1px solid black;
+        padding: 10px;
+    }
+</style>
+
+<div class="row">
+    <div class="col">
+        <h2>Column 1</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin odio eu est rhoncus, vitae commodo mauris convallis. Integer non lacinia quam. </p>
+    </div>
+    <div class="col">
+        <h2>Column 2</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin odio eu est rhoncus, vitae commodo mauris convallis. Integer non lacinia quam. </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <h2>Column 3</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin odio eu est rhoncus, vitae commodo mauris convallis. Integer non lacinia quam. </p>
+    </div>
+    <div class="col">
+        <h2>Column 4</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin odio eu est rhoncus, vitae commodo mauris convallis. Integer non lacinia quam. </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        Div Box 3
+
+        <button id="toggle-list" onclick="toggleList()">Toggle Friends List</button>
+        <ul id="friends-list" style="display:none;">
+            <li>Friend 1</li>
+            <li>Friend 2</li>
+            <li>Friend 3</li>
+        </ul>
+    </div>
 </div>
