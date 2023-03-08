@@ -4,89 +4,103 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>RPG Shop</title>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-        /* Style for the shop page */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .item {
+        /* Custom styles here */
+        .jumbotron {
+            background-image: url('');
+            background-size: cover;
+            background-position: center center;
+            height: 300px;
+            color: #fff;
+            text-shadow: 1px 1px #000;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #eee;
-            border-radius: 5px;
+            justify-content: center;
+            margin-bottom: 50px;
         }
 
-            .item img {
-                max-width: 100px;
-                margin-right: 20px;
-            }
-
-            .item h3 {
-                margin: 0;
-            }
-
-            .item button {
-                background-color: #4CAF50;
-                border: none;
-                color: white;
-                padding: 10px 20px;
+            .jumbotron h1 {
+                font-size: 4rem;
                 text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                border-radius: 5px;
-                cursor: pointer;
+                margin-bottom: 0;
             }
 
-                .item button:hover {
-                    background-color: #3e8e41;
-                }
+        .card {
+            margin-bottom: 30px;
+        }
+
+            .card img {
+                height: 250px;
+                object-fit: cover;
+            }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .card-text {
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            border-radius: 30px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+    <div class="jumbotron">
+        <h1>Header Title</h1>
+    </div>
     <div class="container">
-        <h1>RPG Shop</h1>
-        <div class="item">
-            <img src="sword.jpg" alt="Sword">
-            <div>
-                <h3>Sword</h3>
-                <p>Price: 50 gold</p>
+        <div class="row">
+            @*@foreach (var item in Model.Items)
+            {
+            <div class="col-md-4">
+            <div class="card">
+            <img src="@item.ImageUrl" alt="@item.Name" />
+            <div class="card-body">
+            <h5 class="card-title">@item.Name</h5>
+            <p class="card-text">@item.Description</p>
+            <a href="@item.Url" class="btn btn-primary">Buy Now</a>
             </div>
-            <button>Add to Cart</button>
-        </div>
-        <div class="item">
-            <img src="shield.jpg" alt="Shield">
-            <div>
-                <h3>Shield</h3>
-                <p>Price: 30 gold</p>
             </div>
-            <button>Add to Cart</button>
-        </div>
-        <div class="item">
-            <img src="potion.jpg" alt="Potion">
-            <div>
-                <h3>Potion</h3>
-                <p>Price: 10 gold</p>
             </div>
-            <button>Add to Cart</button>
+            }*@
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="" alt="" />
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text"></p>
+                        <a href="" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="" alt="" />
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text"></p>
+                        <a href="" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="" alt="" />
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text"></p>
+                        <a href="" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
