@@ -3,151 +3,144 @@
 
 @*@model List<Item>*@
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>RPG Item Shop</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <style>
-        /* Style the item cards */
-        .card {
-            margin-bottom: 30px;
-            box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease-in-out;
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<style>
+    .card {
+        margin-bottom: 30px;
+        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
         }
 
-            .card:hover {
-                transform: scale(1.05);
-            }
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
 
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
+    .card-body {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .card-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+    }
+
+    .card-text {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .btn-buy {
+        width: 100%;
+        font-size: 20px;
+        font-weight: bold;
+        background-color: #e1b12c;
+        border-color: #e1b12c;
+        color: #fff;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+        .btn-buy:hover {
+            background-color: #d6a429;
         }
 
-        .card-body {
-            padding: 20px;
-            text-align: center;
-        }
+    .item-price {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #e1b12c;
+    }
 
-        .card-title {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
+    .item-stock {
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: #aaa;
+    }
 
-        .card-text {
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
+    .container {
+        max-width: 1100px;
+        margin-top: 50px;
+    }
 
-        .btn-buy {
-            width: 100%;
-            font-size: 20px;
-            font-weight: bold;
-            background-color: #e1b12c;
-            border-color: #e1b12c;
-            color: #fff;
-            transition: background-color 0.3s ease-in-out;
-        }
+    .shop-title {
+        font-size: 48px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 50px;
+        text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+    }
+</style>
 
-            .btn-buy:hover {
-                background-color: #d6a429;
-            }
-
-        .item-price {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #e1b12c;
-        }
-
-        .item-stock {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #aaa;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin-top: 50px;
-        }
-
-        .shop-title {
-            font-size: 48px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 50px;
-            text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
-        }
-    </style>
-</head>
-<body>
-    <div>
-        <h1 class="shop-title">RPG Item Shop</h1>
-        <div class="row">
-            @*@foreach (var item in Model)
-            {
-            <div class="col-md-4">
+<div>
+    <h1 class="shop-title">RPG Item Shop</h1>
+    <div class="row">
+        @*@foreach (var item in Model)
+        {
+        <div class="col-md-4">
+        <div class="card">
+        <img src="@item.ImageUrl" class="card-img-top" alt="@item.Name" />
+        <div class="card-body">
+        <h5 class="card-title">@item.Name</h5>
+        <p class="card-text">@item.Description</p>
+        <div class="item-price">@item.Price gold</div>
+        <div class="item-stock">@item.Stock available</div>
+        <button class="btn btn-buy" data-item-id="@item.Id">Buy Now</button>
+        </div>
+        </div>
+        </div>
+        }*@
+        <div class="col-md-4">
             <div class="card">
-            <img src="@item.ImageUrl" class="card-img-top" alt="@item.Name" />
-            <div class="card-body">
-            <h5 class="card-title">@item.Name</h5>
-            <p class="card-text">@item.Description</p>
-            <div class="item-price">@item.Price gold</div>
-            <div class="item-stock">@item.Stock available</div>
-            <button class="btn btn-buy" data-item-id="@item.Id">Buy Now</button>
-            </div>
-            </div>
-            </div>
-            }*@
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="/images/test-icons/proto_ring.svg" class="card-img-top" alt="iamge" />
-                    <div class="card-body">
-                        <h5 class="card-title">Name</h5>
-                        <p class="card-text">Description</p>
-                        <div class="item-price">Price gold</div>
-                        <div class="item-stock">Stock available</div>
-                        <button class="btn btn-buy" data-item-id="">Buy Now</button>
-                    </div>
+                <img src="/images/test-icons/proto_ring.svg" class="card-img-top" alt="iamge" />
+                <div class="card-body">
+                    <h5 class="card-title">Name</h5>
+                    <p class="card-text">Description</p>
+                    <div class="item-price">Price gold</div>
+                    <div class="item-stock">Stock available</div>
+                    <button class="btn btn-buy" data-item-id="">Buy Now</button>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="/images/test-icons/proto_ring.svg" class="card-img-top" alt="iamge" />
-                    <div class="card-body">
-                        <h5 class="card-title">Name</h5>
-                        <p class="card-text">Description</p>
-                        <div class="item-price">Price gold</div>
-                        <div class="item-stock">Stock available</div>
-                        <button class="btn btn-buy" data-item-id="">Buy Now</button>
-                    </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="/images/test-icons/proto_ring.svg" class="card-img-top" alt="iamge" />
+                <div class="card-body">
+                    <h5 class="card-title">Name</h5>
+                    <p class="card-text">Description</p>
+                    <div class="item-price">Price gold</div>
+                    <div class="item-stock">Stock available</div>
+                    <button class="btn btn-buy" data-item-id="">Buy Now</button>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="/images/test-icons/proto_ring.svg" class="card-img-top" alt="iamge" />
-                    <div class="card-body">
-                        <h5 class="card-title">Name</h5>
-                        <p class="card-text">Description</p>
-                        <div class="item-price">Price gold</div>
-                        <div class="item-stock">Stock available</div>
-                        <button class="btn btn-buy" data-item-id="">Buy Now</button>
-                    </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="/images/test-icons/proto_ring.svg" class="card-img-top" alt="iamge" />
+                <div class="card-body">
+                    <h5 class="card-title">Name</h5>
+                    <p class="card-text">Description</p>
+                    <div class="item-price">Price gold</div>
+                    <div class="item-stock">Stock available</div>
+                    <button class="btn btn-buy" data-item-id="">Buy Now</button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script>
-        // Handle the buy button click event
-        $('.btn-buy').click(function () {
-            var itemId = $(this).data('item-id');
-            // TODO: Implement buy logic
-        });
-    </script>
-</body>
-</html>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script>
+    // Handle the buy button click event
+    $('.btn-buy').click(function () {
+        var itemId = $(this).data('item-id');
+        // TODO: Implement buy logic
+    });
+</script>
