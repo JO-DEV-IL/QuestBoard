@@ -16,56 +16,39 @@
     </script>
 }
 <style>
-    .row {
+    .flex-container {
         display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        height: 200px;
-    }
-
-    .col {
-        display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        width: 40%;
-        height: 100%;
-        border: 1px solid black;
-        padding: 10px;
+        background-color: #f7f7f7;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .flex-item {
+        width: 150px;
+        height: 150px;
+        background-color: #0077b6;
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 150px;
+        margin: 10px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .flex-item:hover {
+        transform: scale(1.1);
     }
 </style>
 
-<div class="row">
-    <div class="col">
-        <h2>Column 1</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin odio eu est rhoncus, vitae commodo mauris convallis. Integer non lacinia quam. </p>
-    </div>
-    <div class="col">
-        <h2>Column 2</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin odio eu est rhoncus, vitae commodo mauris convallis. Integer non lacinia quam. </p>
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        <h2>Column 3</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin odio eu est rhoncus, vitae commodo mauris convallis. Integer non lacinia quam. </p>
-    </div>
-    <div class="col">
-        <h2>Column 4</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin odio eu est rhoncus, vitae commodo mauris convallis. Integer non lacinia quam. </p>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col">
-        Div Box 3
-
-        <button id="toggle-list" onclick="toggleList()">Toggle Friends List</button>
-        <ul id="friends-list" style="display:none;">
-            <li>Friend 1</li>
-            <li>Friend 2</li>
-            <li>Friend 3</li>
-        </ul>
-    </div>
+<div class="flex-container">
+    <div class="flex-item">1</div>
+    <div class="flex-item">2</div>
+    <div class="flex-item">3</div>
+    <div class="flex-item">4</div>
+    <div class="flex-item">5</div>
+    <div class="flex-item">6</div>
 </div>

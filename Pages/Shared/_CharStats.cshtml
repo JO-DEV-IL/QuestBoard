@@ -2,7 +2,7 @@
 
 @{
     int? user = ViewContext.HttpContext.Session.GetInt32("userID");
-    SqlHelpers.GetStatsModel sqlHelper = new SqlHelpers.GetStatsModel();
+    SqlHelpers.sqlModel sqlHelper = new SqlHelpers.sqlModel();
 
     if (user != null)
     {

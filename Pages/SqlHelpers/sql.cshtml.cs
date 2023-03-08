@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace QuestBoard.Pages.SqlHelpers
 {
-    public class GetStatsModel : PageModel
+    public class sqlModel : PageModel
     {
         public class UserStats
         {

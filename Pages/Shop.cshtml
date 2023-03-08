@@ -1,8 +1,93 @@
 ﻿@page
-@model QuestBoard.Pages.ShopModel
-@{
-}
+@model ShopModel
 
-<h1>The Shop</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RPG Shop</title>
+    <style>
+        /* Style for the shop page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
 
-@*<img src="~/images/shop-interior.jpg" />*@
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+        }
+
+            .item img {
+                max-width: 100px;
+                margin-right: 20px;
+            }
+
+            .item h3 {
+                margin: 0;
+            }
+
+            .item button {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+                .item button:hover {
+                    background-color: #3e8e41;
+                }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RPG Shop</h1>
+        <div class="item">
+            <img src="sword.jpg" alt="Sword">
+            <div>
+                <h3>Sword</h3>
+                <p>Price: 50 gold</p>
+            </div>
+            <button>Add to Cart</button>
+        </div>
+        <div class="item">
+            <img src="shield.jpg" alt="Shield">
+            <div>
+                <h3>Shield</h3>
+                <p>Price: 30 gold</p>
+            </div>
+            <button>Add to Cart</button>
+        </div>
+        <div class="item">
+            <img src="potion.jpg" alt="Potion">
+            <div>
+                <h3>Potion</h3>
+                <p>Price: 10 gold</p>
+            </div>
+            <button>Add to Cart</button>
+        </div>
+    </div>
+</body>
+</html>

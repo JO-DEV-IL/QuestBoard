@@ -3,7 +3,189 @@
 @{
 }
 
-<div id="quest-post">
+<style>
+    .quest-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form {
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 20px;
+    }
+
+        .form h2 {
+            margin-top: 0;
+        }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea {
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        font-size: 16px;
+    }
+
+    input[type="text"] {
+        height: 40px;
+    }
+
+    button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .flex-item {
+        width: 150px;
+        margin: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+        .flex-item:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+            transform: scale(1.05);
+        }
+
+        .flex-item:active {
+            transform: scale(1.1);
+        }
+
+        .flex-item img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .flex-item h3 {
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .flex-item p {
+            margin: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+    .flex-link {
+        background-color: #4CAF50;
+        padding: 10px;
+        text-align: center;
+    }
+
+        .flex-link a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+</style>
+
+<div class="quest-container">
+    <div class="form">
+        <h2>Add a Quest</h2>
+        <form>
+            <label for="title">Quest Title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter quest title">
+
+            <label for="description">Quest Description:</label>
+            <textarea id="description" name="description" rows="4" placeholder="Enter quest description"></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="flex-container">
+        <div class="flex-item">
+            <img src="https://via.placeholder.com/150x150" alt="Quest Image">
+            <h3>Quest Title 1</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel ante nec dui laoreet interdum vel non odio.</p>
+            <div class="flex-link">
+                <a href="#">View Details</a>
+            </div>
+        </div>
+
+        <div class="flex-item">
+            <img src="https://via.placeholder.com/150x150" alt="Quest Image">
+            <h3>Quest Title 2</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel ante nec dui laoreet interdum vel non odio.</p>
+            <div class="flex-link">
+                <a href="#">View Details</a>
+            </div>
+        </div>
+
+        <div class="flex-item">
+            <img src="https://via.placeholder.com/150x150" alt="Quest Image">
+            <h3>Quest Title 3</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel ante nec dui laoreet interdum vel non odio.</p>
+            <div class="flex-link">
+                <a href="#">View Details</a>
+            </div>
+        </div>
+
+        <div class="flex-item">
+            <img src="https://via.placeholder.com/150x150" alt="Quest Image">
+            <h3>Quest Title 4</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel ante nec dui laoreet interdum vel non odio.</p>
+            <div class="flex-link">
+                <a href="#">View Details</a>
+            </div>
+        </div>
+
+        <div class="flex-item">
+            <img src="https://via.placeholder.com/150x150" alt="Quest Image">
+            <h3>Quest Title 5</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel ante nec dui laoreet interdum vel non odio.</p>
+            <div class="flex-link">
+                <a href="#">View Details</a>
+            </div>
+        </div>
+
+        <div class="flex-item">
+            <img src="https://via.placeholder.com/150x150" alt="Quest Image">
+            <h3>Quest Title 6</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel ante nec dui laoreet interdum vel non odio.</p>
+            <div class="flex-link">
+                <a href="#">View Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div id="quest-post">
     <form method="post" style="width:50%;margin:auto">
         <div class="form-group">
             <label for="todoTitle">Quest Title</label>
@@ -15,10 +197,10 @@
         </div>
         <button type="submit" class="btn btn-warning" style="margin-top:15px">Post</button>
     </form>
-</div>
+</div>*@
 
 @*Display personal quest cards if they exist*@
-<div class="grid-container" style="margin:25px 0">
+@*<div class="grid-container" style="margin:25px 0">
     @foreach (var todo in Model.listUserQuests)
     {
         <div class="w3-card-4 w3-hover-shadow" style="width:300px;margin:10px">
@@ -34,11 +216,11 @@
             <button class="w3-button w3-block w3-margin-top" style="background-color: #FFD700">COMPLETE QUEST</button>
         </div>
     }
-</div>
+</div>*@
 
 @*New Quests from Questgivers*@
 @*TODO: Hook up to new sql table*@
-<div style="display:flex">
+@*<div style="display:flex">
     <div class="w3-card-4 w3-hover-shadow" style="background-color:#B8860B">
         <div class="w3-container w3-center" style="padding:20px;width:300px">
             <h3>New Quest Available!</h3>
@@ -62,4 +244,4 @@
             <a class="w3-button w3-red">Decline</a>
         </div>
     </div>
-</div>
+</div>*@

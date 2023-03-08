@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using static QuestBoard.Pages.SqlHelpers.GetStatsModel;
 using System.Data.SqlClient;
 
 namespace QuestBoard.Pages.Users
