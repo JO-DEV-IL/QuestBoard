@@ -56,34 +56,10 @@ body {
     color: navajowhite;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    position: relative;
-}
-
 /*ID tags*/
 
 #site_icon {
     max-height: 35px;
     margin-right: 15px;
     margin-left: -5px;
-}
-
-#home_screen_icon {
-    height: 300px;
-}
-
-#quest-post {
-    border-radius: 15px;
-    background-color: #3d4447;
-    color: antiquewhite;
-    padding: 15px;
-}
-
-#navbar {
-    /*position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;*/
 }
