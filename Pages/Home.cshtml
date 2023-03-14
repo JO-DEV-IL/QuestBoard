@@ -4,13 +4,11 @@
     String user = ViewContext.HttpContext.Session.GetString("userActive");
 }
 
-<div style="display:flex">
-    <div>
-        @if (user != null)
-        {
-            <h1>Welcome, @user.</h1>
-        }
-        <br />
-        <img id="home_screen_icon" src="~/images/qb_icon.png" />
-    </div>
+<div>
+    @if (user != null)
+    {
+        <h1>Welcome, @user.</h1>
+    }
+    <br />
+    <img id="home_screen_icon" src="~/images/qb_icon.png" />
 </div>

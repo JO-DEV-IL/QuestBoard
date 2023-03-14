@@ -1,5 +1,6 @@
 ﻿@{
     string activeUser = "";
+
     if (ViewContext.HttpContext.Session.GetString("userActive") != null)
     {
         activeUser = ViewContext.HttpContext.Session.GetString("userActive");
@@ -9,6 +10,7 @@
         activeUser = null;
     }
 }
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -107,10 +109,10 @@
             <a class="btn btn-warning btn-sm" asp-page="/Users/Settings"><i class="fa-solid fa-cog"></i></a>
         </div>
 
-        <div style="text-align:center;margin:0 auto">
-            <main role="main">
+        <div>
+            <div>
                 @RenderBody()
-            </main>
+            </div>
         </div>
     </div>
 
