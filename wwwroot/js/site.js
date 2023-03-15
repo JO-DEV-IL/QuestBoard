@@ -5,9 +5,9 @@
 
 function toggleStats() {
     const stats = document.getElementById("char-stats-partial");
-    if (stats.style.display === "none") {
-        stats.style.display = "block";
-    } else {
+    if (stats.style.display === "block") {
         stats.style.display = "none";
+    } else {
+        stats.style.display = "block";
     }
 }

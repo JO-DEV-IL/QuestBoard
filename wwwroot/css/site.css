@@ -47,15 +47,6 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.shadowed-border {
-    border: 2px solid #ddd;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    padding: 25px;
-    border-radius: 5px;
-    background-color: #1C1C1C;
-    color: navajowhite;
-}
-
 /*ID tags*/
 
 #site_icon {

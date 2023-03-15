@@ -103,13 +103,13 @@
     {
         <button id="toggle-stats" class="btn-warning" onclick="toggleStats()">Show/Hide Stats</button>
     }
-    <div style="display:flex;">
-        <div id="char-stats-partial" style="display:none" class="shadowed-border">
+    <div style="display:flex">
+        <div id="char-stats-partial" style="display:block;border:2px solid black;border-radius:15px;height:fit-content;padding:25px">
             @Html.Partial("_CharStats.cshtml")
             <a class="btn btn-warning btn-sm" asp-page="/Users/Settings"><i class="fa-solid fa-cog"></i></a>
         </div>
 
-        <div>
+        <div style="padding:25px;">
             <div>
                 @RenderBody()
             </div>

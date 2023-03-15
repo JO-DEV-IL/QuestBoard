@@ -1,10 +1,6 @@
 ﻿@page
 @model ShopModel
 
-@*@model List<Item>*@
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-
 <style>
     .card {
         margin-bottom: 30px;
@@ -55,58 +51,22 @@
 </style>
 
 <div>
-    <div class="row">
-        @*@foreach (var item in Model)
+    <div class="row" style="max-width:50%">
+        @foreach (var item in Model.listShopItems)
         {
-        <div class="col-md-4">
-        <div class="card">
-        <img src="@item.ImageUrl" class="card-img-top" alt="@item.Name" />
-        <div class="card-body">
-        <h5 class="card-title">@item.Name</h5>
-        <p class="card-text">@item.Description</p>
-        <div class="item-price">@item.Price gold</div>
-        <div class="item-stock">@item.Stock available</div>
-        <button class="btn btn-buy" data-item-id="@item.Id">Buy Now</button>
-        </div>
-        </div>
-        </div>
-        }*@
-        <div class="col-md-4">
-            <div class="card">
-                <img src="/images/test-icons/proto_ring.svg" class="card-img-top" alt="iamge" />
-                <div class="card-body">
-                    <h5 class="card-title">Name</h5>
-                    <p class="card-text">Description</p>
-                    <div class="item-price">Price gold</div>
-                    <div class="item-stock">Stock available</div>
-                    <button class="btn btn-buy" data-item-id="">Buy Now</button>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/images/@item.image" class="card-img-top" alt="@item.name" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.name</h5>
+                        <p class="card-text">@item.description</p>
+                        <div class="item-price">@item.price G</div>
+                        <div class="item-stock">@item.stock available</div>
+                        <button class="btn btn-buy" data-item-id="">Buy Now</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <img src="/images/test-icons/proto_ring.svg" class="card-img-top" alt="iamge" />
-                <div class="card-body">
-                    <h5 class="card-title">Name</h5>
-                    <p class="card-text">Description</p>
-                    <div class="item-price">Price gold</div>
-                    <div class="item-stock">Stock available</div>
-                    <button class="btn btn-buy" data-item-id="">Buy Now</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <img src="/images/test-icons/proto_ring.svg" class="card-img-top" alt="iamge" />
-                <div class="card-body">
-                    <h5 class="card-title">Name</h5>
-                    <p class="card-text">Description</p>
-                    <div class="item-price">Price gold</div>
-                    <div class="item-stock">Stock available</div>
-                    <button class="btn btn-buy" data-item-id="">Buy Now</button>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>
 
