@@ -50,8 +50,10 @@
 
 </style>
 
-<div>
-    <div class="row" style="max-width:50%">
+<div style="position:absolute">
+    <img style="width:75%;border-radius:15px" src="/images/shop-front.jpg" />
+    <div><span style="font-size:60px;text-align:center">The Shop</span></div>
+    <div class="row" style="width:50%;margin:auto 200px;border: 2px solid gray;padding:25px">
         @foreach (var item in Model.listShopItems)
         {
             <div class="col-md-4">

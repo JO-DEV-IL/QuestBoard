@@ -101,10 +101,10 @@
     @*Show stat toggle button only on actual logged in pages*@
     @if (Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Loading" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Login" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Create" && activeUser != null)
     {
-        <button id="toggle-stats" class="btn-warning" onclick="toggleStats()">Show/Hide Stats</button>
+        @*<button id="toggle-stats">Show/Hide Stats (Disabled)</button>*@
     }
     <div style="display:flex">
-        <div id="char-stats-partial" style="display:block;border:2px solid black;border-radius:15px;height:fit-content;padding:25px">
+        <div id="char-stats-partial" style="display:block;border:2px solid black;border-radius:15px;height:fit-content;width:fit-content;padding:25px">
             @Html.Partial("_CharStats.cshtml")
             <a class="btn btn-warning btn-sm" asp-page="/Users/Settings"><i class="fa-solid fa-cog"></i></a>
         </div>
@@ -116,11 +116,11 @@
         </div>
     </div>
 
-    <footer class="footer text-muted">
+    @*<footer class="footer text-muted">
         <div class="container">
             &copy; 2023 - QuestBoard - A Work In Progress by Jillian O'Keefe
         </div>
-    </footer>
+    </footer>*@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
