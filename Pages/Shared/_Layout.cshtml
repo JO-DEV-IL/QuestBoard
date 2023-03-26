@@ -103,6 +103,13 @@
     {
         @*<button id="toggle-stats">Show/Hide Stats (Disabled)</button>*@
     }
+
+    @*Only show partial view if not on one of these pages*@
+    if (Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Loading"
+    && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Login"
+    && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Create"
+    && user != null)
+    {
     <div style="display:flex">
         <div id="char-stats-partial" style="display:block;border:2px solid black;border-radius:15px;height:fit-content;width:fit-content;padding:25px">
             @Html.Partial("_CharStats.cshtml")
@@ -115,11 +122,12 @@
             </div>
         </div>
     </div>
+    }
 
     @*<footer class="footer text-muted">
-        <div class="container">
-            &copy; 2023 - QuestBoard - A Work In Progress by Jillian O'Keefe
-        </div>
+    <div class="container">
+    &copy; 2023 - QuestBoard - A Work In Progress by Jillian O'Keefe
+    </div>
     </footer>*@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
