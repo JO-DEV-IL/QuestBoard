@@ -113,8 +113,9 @@
         && activeUser != null)
         {
             <div id="char-stats-partial" style="display:block;border:2px solid black;border-radius:15px;height:fit-content;width:fit-content;padding:25px">
-                @Html.Partial("_CharStats.cshtml")
                 <a class="btn btn-warning btn-sm" asp-page="/Users/Settings"><i class="fa-solid fa-cog"></i></a>
+
+                @Html.Partial("_CharStats.cshtml")
             </div>
         }
 
