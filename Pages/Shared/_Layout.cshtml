@@ -104,17 +104,19 @@
         @*<button id="toggle-stats">Show/Hide Stats (Disabled)</button>*@
     }
 
-    @*Only show partial view if not on one of these pages*@
-    if (Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Loading"
-    && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Login"
-    && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Create"
-    && user != null)
-    {
     <div style="display:flex">
-        <div id="char-stats-partial" style="display:block;border:2px solid black;border-radius:15px;height:fit-content;width:fit-content;padding:25px">
-            @Html.Partial("_CharStats.cshtml")
-            <a class="btn btn-warning btn-sm" asp-page="/Users/Settings"><i class="fa-solid fa-cog"></i></a>
-        </div>
+
+        @*Only show partial view if not on one of these pages*@
+        @if (Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Loading"
+        && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Login"
+        && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Create"
+        && activeUser != null)
+        {
+            <div id="char-stats-partial" style="display:block;border:2px solid black;border-radius:15px;height:fit-content;width:fit-content;padding:25px">
+                @Html.Partial("_CharStats.cshtml")
+                <a class="btn btn-warning btn-sm" asp-page="/Users/Settings"><i class="fa-solid fa-cog"></i></a>
+            </div>
+        }
 
         <div style="padding:25px;">
             <div>
@@ -122,7 +124,6 @@
             </div>
         </div>
     </div>
-    }
 
     @*<footer class="footer text-muted">
     <div class="container">
