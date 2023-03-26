@@ -1,5 +1,16 @@
 ﻿@page
 @model ShopModel
+@using QuestBoard.Pages.SqlHelpers;
+
+@{
+    int? user = ViewContext.HttpContext.Session.GetInt32("userID");
+    SqlHelpers.sqlModel sqlHelper = new SqlHelpers.sqlModel();
+
+    if (user != null)
+    {
+        sqlHelper.GetShopItemsSQL();
+    }
+}
 
 <style>
     .card {
@@ -54,7 +65,7 @@
     <img style="width:75%;border-radius:15px" src="/images/shop-front.jpg" />
     <div><span style="font-size:60px;text-align:center">The Shop</span></div>
     <div class="row" style="width:50%;margin:auto 200px;border: 2px solid gray;padding:25px">
-        @foreach (var item in Model.listShopItems)
+        @foreach (var item in sqlHelper.listShopItems)
         {
             <div class="col-md-4">
                 <div class="card">

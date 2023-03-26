@@ -34,6 +34,16 @@ namespace QuestBoard.Pages.SqlHelpers
             public String accessory2;
         }
 
+        public class ShopItems
+        {
+            public String name;
+            public String description;
+            public String price;
+            public String stock;
+            public String image;
+        }
+
+        public List<ShopItems> listShopItems = new List<ShopItems>();
         public List<UserStats> listUsersStats = new List<UserStats>();
         public List<UserEquipment> listEquipment = new List<UserEquipment>();
 
@@ -116,6 +126,37 @@ namespace QuestBoard.Pages.SqlHelpers
                         userEquipment.accessory2 = reader.GetString(10);
 
                         listEquipment.Add(userEquipment);
+                    }
+                }
+                connection.Close();
+            }
+        }
+        public void GetShopItemsSQL()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("[questboard_app].[dbo].[qb_master_Proc]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter optionName = new SqlParameter("@Option", SqlDbType.VarChar, 50);
+                optionName.Value = "sql_ItemShop";
+                command.Parameters.Add(optionName);
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ShopItems shopItems = new ShopItems();
+
+                        shopItems.name = reader.GetString(0);
+                        shopItems.description = reader.GetString(1);
+                        shopItems.price = "" + reader.GetInt32(2);
+                        shopItems.stock = "" + reader.GetInt32(3);
+                        shopItems.image = reader.GetString(4);
+
+                        listShopItems.Add(shopItems);
                     }
                 }
                 connection.Close();
