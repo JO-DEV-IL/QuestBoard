@@ -1,8 +1,16 @@
 ﻿@page
 @model QuestBoard.Pages.Dungeons.ForestModel
 @{
-    //I want the dungeons to have a completely different feel from the rest of the website, so they will use their own layout
     Layout = null;
+}
+
+@section scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var bossSprite = document.querySelector(".boss-sprite");
+            bossSprite.style.animationPlayState = "running";
+        });
+    </script>
 }
 
 <style>
@@ -31,6 +39,8 @@
         display: block;
     }
 </style>
+
+<div class="boss-sprite"></div>
 
 <div class="dgn_container">
     <div class="center">

@@ -17,6 +17,7 @@
         margin-bottom: 30px;
         box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s ease-in-out;
+        max-width: 200px;
     }
 
         .card:hover {
@@ -59,28 +60,30 @@
             background-color: #d6a429;
         }
 
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
 </style>
 
-<div style="position:absolute">
-    <img style="width:75%;border-radius:15px" src="/images/shop-front.jpg" />
-    <div><span style="font-size:60px;text-align:center">The Shop</span></div>
-    <div class="row" style="width:50%;margin:auto 200px;border: 2px solid gray;padding:25px">
-        @foreach (var item in sqlHelper.listShopItems)
-        {
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="~/images/@item.image" class="card-img-top" alt="@item.name" />
-                    <div class="card-body">
-                        <h5 class="card-title">@item.name</h5>
-                        <p class="card-text">@item.description</p>
-                        <div class="item-price">@item.price G</div>
-                        <div class="item-stock">@item.stock available</div>
-                        <button class="btn btn-buy" data-item-id="">Buy Now</button>
-                    </div>
-                </div>
+<img style="height:500px;border-radius:15px" src="/images/shop-front.jpg" />
+
+<div class="flex-container">
+    @foreach (var item in sqlHelper.listShopItems)
+    {
+        <div class="card">
+            <img src="~/images/@item.image" class="card-img-top" alt="@item.name" />
+            <div class="card-body">
+                <h5 class="card-title">@item.name</h5>
+                <p class="card-text">@item.description</p>
+                <div class="item-price">@item.price G</div>
+                <div class="item-stock">@item.stock available</div>
+                <button class="btn btn-buy" data-item-id="">Buy Now</button>
             </div>
-        }
-    </div>
+        </div>
+    }
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

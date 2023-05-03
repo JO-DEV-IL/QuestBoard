@@ -54,3 +54,26 @@ body {
     margin-right: 15px;
     margin-left: -5px;
 }
+
+
+/*Boss animation*/
+@keyframes boss-breathing {
+    /*0% {
+        background-image: url('../images/test-icons/werewolf1.png');
+    }*/
+
+    0% {
+        background-image: url('../images/test-icons/werewolf2.png');
+    }
+
+    100% {
+        background-image: url('../images/test-icons/werewolf3.png');
+    }
+}
+
+.boss-sprite {
+    width: 200px;
+    height: 200px;
+    background-repeat: no-repeat;
+    animation: boss-breathing 3s infinite;
+}

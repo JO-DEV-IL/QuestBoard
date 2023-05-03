@@ -1,0 +1,16 @@
+﻿@page
+@model QuestBoard.Pages.Dungeons.Test_DungeonModel
+@{
+    //Layout = null;
+}
+
+@section scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var bossSprite = document.querySelector(".boss-sprite");
+            bossSprite.style.animationPlayState = "running";
+        });
+    </script>
+}
+
+<div class="boss-sprite"></div>
