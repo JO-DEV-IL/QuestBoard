@@ -119,10 +119,8 @@
             </div>
         }
 
-        <div style="padding:25px;">
-            <div>
-                @RenderBody()
-            </div>
+        <div style="padding:25px;margin:auto;text-align:center">
+            @RenderBody()
         </div>
     </div>
 
@@ -135,6 +133,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="/_framework/aspnetcore-browser-refresh.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
