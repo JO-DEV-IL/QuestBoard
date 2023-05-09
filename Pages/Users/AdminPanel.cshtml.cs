@@ -7,12 +7,10 @@ namespace QuestBoard.Pages.Users
     {
         public String userID;
         public String userName;
-        public String firstName;
-        public String lastName;
-        public String age;
+        public String email;
+        public String password;
         public String class_specialty;
         public String level;
-        public String password;
     }
 
     public class AdminPanelModel : PageModel
@@ -39,11 +37,10 @@ namespace QuestBoard.Pages.Users
                                 UserInfo userInfo = new UserInfo();
                                 userInfo.userID = "" + reader.GetInt32(0);
                                 userInfo.userName = reader.GetString(1);
-                                userInfo.firstName = reader.GetString(2);
-                                userInfo.lastName = reader.GetString(3);
-                                userInfo.age = "" + reader.GetInt32(4);
-                                userInfo.class_specialty = reader.GetString(5);
-                                userInfo.level = "" + reader.GetInt32(6);
+                                userInfo.email = "" + reader.GetInt32(2);
+                                userInfo.password = "" + reader.GetInt32(3);
+                                userInfo.class_specialty = reader.GetString(4);
+                                userInfo.level = "" + reader.GetInt32(5);
 
                                 listUsers.Add(userInfo);
                             }

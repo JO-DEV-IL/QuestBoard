@@ -13,7 +13,7 @@ namespace QuestBoard.Pages.Users
 
         public void OnPost()
         {
-            userInfo.userName = Request.Form["username"];
+            userInfo.userName = Request.Form["userName"];
             userInfo.password = Request.Form["password"];
 
             if (userInfo.userName.Length == 0 || userInfo.password.Length == 0)
@@ -30,18 +30,18 @@ namespace QuestBoard.Pages.Users
                     {
                         connection.Open();
 
-                        String sql = "select id, userName, password, role from [questboard_app].[dbo].[master_Users] where userName = @username and password = @password";
-                        String update = "update [questboard_app].[dbo].[master_Users] set is_active = 1 where userName = @username and password = @password";
+                        String sql = "select * from [questboard_app].[dbo].[master_Users] where userName = @userName and password = @password";
+                        String update = "update [questboard_app].[dbo].[master_Users] set is_active = 1 where userName = @userName and password = @password";
 
                         using (SqlCommand command = new SqlCommand(sql, connection))
                         {
-                            command.Parameters.AddWithValue("@username", userInfo.userName);
+                            command.Parameters.AddWithValue("@userName", userInfo.userName);
                             command.Parameters.AddWithValue("@password", userInfo.password);
                             command.ExecuteNonQuery();
 
                             using (SqlCommand updateUser = new SqlCommand(update, connection))
                             {
-                                updateUser.Parameters.AddWithValue("@username", userInfo.userName);
+                                updateUser.Parameters.AddWithValue("@userName", userInfo.userName);
                                 updateUser.Parameters.AddWithValue("@password", userInfo.password);
                                 updateUser.ExecuteNonQuery();
                             }
@@ -53,7 +53,7 @@ namespace QuestBoard.Pages.Users
 
                             // Boolean variable establishing if a table is returned and if a row is returned in that table
                             bool loginSuccessful = ((dataset.Tables.Count > 0) && (dataset.Tables[0].Rows.Count > 0));
-                            String isAdmin = (string)dataset.Tables[0].Rows[0]["role"];
+                            String isAdmin = (string)dataset.Tables[0].Rows[0]["is_admin"];
                             String user = (string)dataset.Tables[0].Rows[0]["userName"];
                             int userID = (int)dataset.Tables[0].Rows[0]["id"];
 

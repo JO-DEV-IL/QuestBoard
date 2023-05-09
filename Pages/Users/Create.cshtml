@@ -1,73 +1,176 @@
 ﻿@page
 @model QuestBoard.Pages.Users.CreateModel
 @{
+    Layout = null;
 }
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+</head>
 
-<div>
-    <br />
-    <h2>Create New Adventurer</h2>
-
-    @if (Model.errorMessage.Length > 0)
-    {
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>@Model.errorMessage</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+<style>
+    body {
+        background-color: #f8f9fa;
     }
 
-    <form method="post" style="width:1000px">
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Username</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="userName" value="@Model.userInfo.userName" />
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">First Name</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="firstName" value="@Model.userInfo.firstName" />
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Last Name</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="lastName" value="@Model.userInfo.lastName" />
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Age</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="age" value="@Model.userInfo.age" />
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Class</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="class_specialty" value="@Model.userInfo.class_specialty" />
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Password</label>
-            <div class="col-sm-6">
-                <input type="password" class="form-control" name="password" value="@Model.userInfo.password" />
-            </div>
-        </div>
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        max-width: 500px;
+        margin: 0 auto;
+    }
 
-        @if (Model.successMessage.Length > 0)
-        {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>@Model.successMessage</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+    .card-header {
+        background-color: #343a40;
+        color: #fff;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .card-body {
+        padding: 30px;
+    }
+
+    .form-control {
+        border-radius: 20px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 20px;
+    }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
         }
+</style>
 
-        <div class="row mb-3">
-            <div class="offset-sm-3 col-sm-3 d-grid">
-                <button type="submit" class="btn btn-warning">Submit</button>
+@if (Model.errorMessage.Length > 0)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (Model.successMessage.Length > 0)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@Model.successMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+@{
+    // Define the maximum number of points that the user can allocate
+    var maxPoints = 10;
+
+    // Define the current number of points allocated to each stat
+    var stat1Points = 0;
+    var stat2Points = 0;
+    var stat3Points = 0;
+
+    var points = stat1Points + stat2Points + stat3Points;
+    var available = maxPoints - points;
+
+    // Define a function to update the points allocated to a stat
+    // Make sure the user is not allocating more points than the maximum
+    if (points > maxPoints)
+    {
+        points = maxPoints;
+    }
+
+    if (stat1Points > 0)
+    {
+        stat1Points + 
+    }
+
+    if (stat2Points > 0)
+    {
+
+    }
+
+    if (stat3Points > 0)
+    {
+
+    }
+}
+
+<body>
+    <div class="container my-5">
+        <div class="card">
+            <div class="card-header">
+                <h4>Register Adventurer</h4>
             </div>
-            <div class="col-sm-3 d-grid">
-                <a class="btn btn-outline-danger" href="/Users/Login" role="button">Cancel</a>
+            <div class="card-body">
+                <form method="post">
+
+                    <h5>General</h5>
+
+                    <br />
+
+                    <div class="form-group">
+                        <label for="name">Username:</label>
+                        <input type="text" name="userName" id="userName" class="form-control" value="@Model.userInfo.userName" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email" class="form-control" value="@Model.userInfo.email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" class="form-control" value="@Model.userInfo.password" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password:</label>
+                        <input type="password" name="confirm_password" id="confirm_password" class="form-control" required />
+                    </div>
+
+                    <br />
+
+                    <h5>Stats</h5>
+
+                    <br />
+
+                    <div class="form-group">
+                        <select id="class_specialty" name="class_specialty" class="form-control" value="@Model.userInfo.class_specialty" required>
+                            <option value="">Choose a Class</option>
+                            <option value="warrior">Warrior</option>
+                            <option value="mage">Mage</option>
+                            <option value="rogue">Rogue</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <p>Total Points Available: @available</p>
+
+                        <table>
+                            <tr>
+                                <td>Stat 1:</td>
+                                <td><input type="number" min="0" max="@maxPoints" value="@stat1Points" onchange="@available - @stat1Points"></td>
+                            </tr>
+                            <tr>
+                                <td>Stat 2:</td>
+                                <td><input type="number" min="0" max="@maxPoints" value="@stat2Points" onchange=""></td>
+                            </tr>
+                            <tr>
+                                <td>Stat 3:</td>
+                                <td><input type="number" min="0" max="@maxPoints" value="@stat3Points" onchange=""></td>
+                            </tr>
+                        </table>
+
+                        <p>Total Points Allocated: @points</p>
+                    </div>
+
+                    <br />
+
+                    <button type="submit" class="btn btn-primary btn-block mt-4">Join Website</button>
+                </form>
             </div>
         </div>
-    </form>
-</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
