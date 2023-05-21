@@ -3,6 +3,7 @@
 @{
     Layout = null;
 }
+
 <head>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
 </head>
@@ -61,42 +62,6 @@
     </div>
 }
 
-
-@{
-    // Define the maximum number of points that the user can allocate
-    var maxPoints = 10;
-
-    // Define the current number of points allocated to each stat
-    var stat1Points = 0;
-    var stat2Points = 0;
-    var stat3Points = 0;
-
-    var points = stat1Points + stat2Points + stat3Points;
-    var available = maxPoints - points;
-
-    // Define a function to update the points allocated to a stat
-    // Make sure the user is not allocating more points than the maximum
-    if (points > maxPoints)
-    {
-        points = maxPoints;
-    }
-
-    if (stat1Points > 0)
-    {
-        stat1Points + 
-    }
-
-    if (stat2Points > 0)
-    {
-
-    }
-
-    if (stat3Points > 0)
-    {
-
-    }
-}
-
 <body>
     <div class="container my-5">
         <div class="card">
@@ -124,7 +89,7 @@
                     </div>
                     <div class="form-group">
                         <label for="confirm_password">Confirm Password:</label>
-                        <input type="password" name="confirm_password" id="confirm_password" class="form-control" required />
+                        <input type="password" name="confirm_password" id="confirm_password" class="form-control" value="@Model.userInfo.confirm_password" required />
                     </div>
 
                     <br />
@@ -135,33 +100,40 @@
 
                     <div class="form-group">
                         <select id="class_specialty" name="class_specialty" class="form-control" value="@Model.userInfo.class_specialty" required>
-                            <option value="">Choose a Class</option>
+                            <option value="">Choose a Class:</option>
                             <option value="warrior">Warrior</option>
                             <option value="mage">Mage</option>
                             <option value="rogue">Rogue</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <p>Total Points Available: @available</p>
-
-                        <table>
-                            <tr>
-                                <td>Stat 1:</td>
-                                <td><input type="number" min="0" max="@maxPoints" value="@stat1Points" onchange="@available - @stat1Points"></td>
-                            </tr>
-                            <tr>
-                                <td>Stat 2:</td>
-                                <td><input type="number" min="0" max="@maxPoints" value="@stat2Points" onchange=""></td>
-                            </tr>
-                            <tr>
-                                <td>Stat 3:</td>
-                                <td><input type="number" min="0" max="@maxPoints" value="@stat3Points" onchange=""></td>
-                            </tr>
-                        </table>
-
-                        <p>Total Points Allocated: @points</p>
-                    </div>
+                    <form>
+                        <div class="form-group">
+                            <p id="pointsLeft">Points Available: <span id="totalPoints">50</span></p>
+                            <table>
+                                <tr>
+                                    <td>Stat 1:</td>
+                                    <td><input type="number" id="stat1Points" min="0" max="50" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>Stat 2:</td>
+                                    <td><input type="number" id="stat2Points" min="0" max="50" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>Stat 3:</td>
+                                    <td><input type="number" id="stat3Points" min="0" max="50" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>Stat 4:</td>
+                                    <td><input type="number" id="stat4Points" min="0" max="50" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>Stat 5:</td>
+                                    <td><input type="number" id="stat5Points" min="0" max="50" value="0"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
 
                     <br />
 
@@ -173,4 +145,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    @*For some reason, despite having a script link on Layout, JS link needs to be added to the page to have access to it*@
+    <script src="~/js/site.js"></script>
 </body>

@@ -53,7 +53,7 @@ namespace QuestBoard.Pages.Users
 
                             // Boolean variable establishing if a table is returned and if a row is returned in that table
                             bool loginSuccessful = ((dataset.Tables.Count > 0) && (dataset.Tables[0].Rows.Count > 0));
-                            String isAdmin = (string)dataset.Tables[0].Rows[0]["is_admin"];
+                            bool isAdmin = (bool)dataset.Tables[0].Rows[0]["is_admin"];
                             String user = (string)dataset.Tables[0].Rows[0]["userName"];
                             int userID = (int)dataset.Tables[0].Rows[0]["id"];
 
@@ -64,9 +64,9 @@ namespace QuestBoard.Pages.Users
 
                                 Response.Redirect("/Users/Loading");
 
-                                if (isAdmin == "Admin")
+                                if (isAdmin)
                                 {
-                                    HttpContext.Session.SetString("isAdmin", isAdmin); // Only create this session variable if the user is an Admin
+                                    HttpContext.Session.SetString("isAdmin", isAdmin.ToString()); // Only create this session variable if the user is an Admin
                                 }
                             }
                             else

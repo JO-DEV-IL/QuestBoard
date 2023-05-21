@@ -16,7 +16,6 @@ namespace QuestBoard.Pages.Users
 
         public void OnGet()
         {
-            // Do nothing on pageload
         }
 
         public void OnPost()
@@ -24,7 +23,15 @@ namespace QuestBoard.Pages.Users
             userInfo.userName = Request.Form["userName"];
             userInfo.email = Request.Form["email"];
             userInfo.password = Request.Form["password"];
+            userInfo.confirm_password = Request.Form["confirm_password"];
             userInfo.class_specialty = Request.Form["class_specialty"];
+
+            // Confirm password validation
+            if (userInfo.password != userInfo.confirm_password)
+            {
+                errorMessage = "Passwords do not match. Please try again.";
+            }
+
             {
                 try
                 {
