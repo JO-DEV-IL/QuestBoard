@@ -23,15 +23,20 @@ namespace QuestBoard.Pages.Users
             userInfo.userName = Request.Form["userName"];
             userInfo.email = Request.Form["email"];
             userInfo.password = Request.Form["password"];
-            userInfo.confirm_password = Request.Form["confirm_password"];
+            string confirmPass = Request.Form["confirm_password"];
             userInfo.class_specialty = Request.Form["class_specialty"];
 
-            // Confirm password validation
-            if (userInfo.password != userInfo.confirm_password)
+            string stat1Value = Request.Form["stat1Points"];
+            string stat2Value = Request.Form["stat2Points"];
+            string stat3Value = Request.Form["stat3Points"];
+            string stat4Value = Request.Form["stat4Points"];
+
+            // Confirm password validation before proceeding
+            if (userInfo.password != confirmPass)
             {
                 errorMessage = "Passwords do not match. Please try again.";
             }
-
+            else
             {
                 try
                 {
@@ -50,6 +55,10 @@ namespace QuestBoard.Pages.Users
                         command.Parameters.AddWithValue("@email", userInfo.email);
                         command.Parameters.AddWithValue("@password", userInfo.password);
                         command.Parameters.AddWithValue("@class", userInfo.class_specialty);
+                        command.Parameters.AddWithValue("@stat1", (stat1Value));
+                        command.Parameters.AddWithValue("@stat2", (stat2Value));
+                        command.Parameters.AddWithValue("@stat3", (stat3Value));
+                        command.Parameters.AddWithValue("@stat4", (stat4Value));
 
                         command.ExecuteNonQuery();
 

@@ -9,7 +9,6 @@ namespace QuestBoard.Pages.Users
         public String userName;
         public String email;
         public String password;
-        public String confirm_password;
         public String class_specialty;
         public String level;
     }

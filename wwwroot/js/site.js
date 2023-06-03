@@ -16,22 +16,21 @@ const maxTotalPoints = 50;
 const stat1Input = document.getElementById('stat1Points');
 const stat2Input = document.getElementById('stat2Points');
 const stat3Input = document.getElementById('stat3Points');
-const stat4Input = document.getElementById('stat3Points');
-const stat5Input = document.getElementById('stat3Points');
+const stat4Input = document.getElementById('stat4Points');
 const totalPointsSpan = document.getElementById('totalPoints');
 
 stat1Input.addEventListener('input', updateTotalPoints);
 stat2Input.addEventListener('input', updateTotalPoints);
 stat3Input.addEventListener('input', updateTotalPoints);
 stat4Input.addEventListener('input', updateTotalPoints);
-stat5Input.addEventListener('input', updateTotalPoints);
 
 function updateTotalPoints() {
     const stat1Value = parseInt(stat1Input.value) || 0;
     const stat2Value = parseInt(stat2Input.value) || 0;
     const stat3Value = parseInt(stat3Input.value) || 0;
+    const stat4Value = parseInt(stat4Input.value) || 0;
 
-    let totalPoints = maxTotalPoints - (stat1Value + stat2Value + stat3Value);
+    let totalPoints = maxTotalPoints - (stat1Value + stat2Value + stat3Value + stat4Value);
 
     totalPoints = Math.max(0, Math.min(maxTotalPoints, totalPoints));
 
@@ -41,4 +40,5 @@ function updateTotalPoints() {
     stat1Input.max = remainingPoints + parseInt(stat1Input.value);
     stat2Input.max = remainingPoints + parseInt(stat2Input.value);
     stat3Input.max = remainingPoints + parseInt(stat3Input.value);
+    stat4Input.max = remainingPoints + parseInt(stat4Input.value);
 }

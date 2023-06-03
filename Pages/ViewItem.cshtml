@@ -26,15 +26,32 @@
 
         @if (item.equipable == true)
         {
-            <div style="display:flex;justify-content:space-between">
-                <form asp-page-handler="equip" method="post">
-                    <button class="btn btn-warning">Equip</button>
-                </form>
-                <br />
-                <form asp-page-handler="unequip" method="post">
-                    <button class="btn btn-outline-danger">Unequip</button>
-                </form>
-            </div>
+            if (item.is_accessory == "Accessory")
+            {
+                <div style="display:flex;justify-content:space-between">
+                    <form asp-page-handler="equipAccessory" method="post">
+                        <button class="btn btn-warning" name="buttonID" value="1">Equip Accessory 1</button>
+                        <button class="btn btn-warning" name="buttonID" value="2">Equip Accessory 2</button>
+                    </form>
+                    <br />
+                    <form asp-page-handler="unequipAccessory" method="post">
+                        <button class="btn btn-outline-danger" name="buttonID" value="1">Unequip Accessory 1</button>
+                        <button class="btn btn-outline-danger" name="buttonID" value="2">Unequip Accessory 2</button>
+                    </form>
+                </div>
+            }
+            else
+            {
+                <div style="display:flex;justify-content:space-between">
+                    <form asp-page-handler="equip" method="post">
+                        <button class="btn btn-warning">Equip</button>
+                    </form>
+                    <br />
+                    <form asp-page-handler="unequip" method="post">
+                        <button class="btn btn-outline-danger">Unequip</button>
+                    </form>
+                </div>
+            }
         }
     }
 

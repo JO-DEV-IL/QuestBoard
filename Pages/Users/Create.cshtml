@@ -50,7 +50,7 @@
 {
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>@Model.errorMessage</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Dismiss</button>
     </div>
 }
 
@@ -58,7 +58,7 @@
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>@Model.successMessage</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Dismiss</button>
     </div>
 }
 
@@ -70,11 +70,8 @@
             </div>
             <div class="card-body">
                 <form method="post">
-
                     <h5>General</h5>
-
                     <br />
-
                     <div class="form-group">
                         <label for="name">Username:</label>
                         <input type="text" name="userName" id="userName" class="form-control" value="@Model.userInfo.userName" required />
@@ -89,15 +86,11 @@
                     </div>
                     <div class="form-group">
                         <label for="confirm_password">Confirm Password:</label>
-                        <input type="password" name="confirm_password" id="confirm_password" class="form-control" value="@Model.userInfo.confirm_password" required />
+                        <input type="password" name="confirm_password" id="confirm_password" class="form-control" required />
                     </div>
-
                     <br />
-
                     <h5>Stats</h5>
-
                     <br />
-
                     <div class="form-group">
                         <select id="class_specialty" name="class_specialty" class="form-control" value="@Model.userInfo.class_specialty" required>
                             <option value="">Choose a Class:</option>
@@ -105,42 +98,32 @@
                             <option value="mage">Mage</option>
                             <option value="rogue">Rogue</option>
                         </select>
+
+                        <p id="pointsLeft">Points Available: <span id="totalPoints">50</span></p>
+                        <table>
+                            <tr>
+                                <td>HP: </td>
+                                <td><input style="width:50px" type="number" name="stat1Points" id="stat1Points" min="0" max="50" value="0"></td>
+                            </tr>
+                            <tr>
+                                <td>Power: </td>
+                                <td><input style="width:50px" type="number" name="stat2Points" id="stat2Points" min="0" max="50" value="0"></td>
+                            </tr>
+                            <tr>
+                                <td>Defense: </td>
+                                <td><input style="width:50px" type="number" name="stat3Points" id="stat3Points" min="0" max="50" value="0"></td>
+                            </tr>
+                            <tr>
+                                <td>Luck: </td>
+                                <td><input style="width:50px" type="number" name="stat4Points" id="stat4Points" min="0" max="50" value="0"></td>
+                            </tr>
+                        </table>
                     </div>
-
-                    <form>
-                        <div class="form-group">
-                            <p id="pointsLeft">Points Available: <span id="totalPoints">50</span></p>
-                            <table>
-                                <tr>
-                                    <td>Stat 1:</td>
-                                    <td><input type="number" id="stat1Points" min="0" max="50" value="0"></td>
-                                </tr>
-                                <tr>
-                                    <td>Stat 2:</td>
-                                    <td><input type="number" id="stat2Points" min="0" max="50" value="0"></td>
-                                </tr>
-                                <tr>
-                                    <td>Stat 3:</td>
-                                    <td><input type="number" id="stat3Points" min="0" max="50" value="0"></td>
-                                </tr>
-                                <tr>
-                                    <td>Stat 4:</td>
-                                    <td><input type="number" id="stat4Points" min="0" max="50" value="0"></td>
-                                </tr>
-                                <tr>
-                                    <td>Stat 5:</td>
-                                    <td><input type="number" id="stat5Points" min="0" max="50" value="0"></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </form>
-
-                    <br />
-
                     <button type="submit" class="btn btn-primary btn-block mt-4">Join Website</button>
                 </form>
             </div>
         </div>
+    </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
