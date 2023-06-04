@@ -11,6 +11,7 @@
 <style>
     body {
         background-color: #f8f9fa;
+        background-image: url('https://i.pinimg.com/originals/ce/a0/f5/cea0f5d938a6b39bc744737d16b6eabe.jpg'); /*test background*/
     }
 
     .card {
@@ -50,7 +51,7 @@
 {
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>@Model.errorMessage</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Dismiss</button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert">Dismiss</button>
     </div>
 }
 
@@ -58,7 +59,7 @@
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>@Model.successMessage</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Dismiss</button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert">Dismiss</button>
     </div>
 }
 
@@ -120,6 +121,8 @@
                         </table>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mt-4">Join Website</button>
+                    <br />
+                    <a href="/Users/Login">Back to Login</a>
                 </form>
             </div>
         </div>

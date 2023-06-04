@@ -11,24 +11,29 @@
     }
 }
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - QuestBoard</title>
+
+    @*Bootstrap css*@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    @*Standard css*@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/QuestBoard.styles.css" asp-append-version="true" />
+
+    @*FontAwesome icons*@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 </head>
 <body>
     <header>
 
         @*Hide the navbar if on the loading screen or login screen*@
-        @if (Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Loading" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Login" && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Create")
+        @if (Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Loading"
+        && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Login"
+        && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Create")
         {
             <nav id="navbar" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3">
                 <div class="container">
@@ -88,7 +93,7 @@
                             <li class="nav-item" style="margin-left:10px">
                                 @if (activeUser != null)
                                 {
-                                    <a class="btn-danger text-white nav-link p-2" asp-page="/DungeonGates">Dungeon Run!</a>
+                                    <a class="nav-link text-dark" asp-page="/DungeonGates">Dungeon Run!</a>
                                 }
                             </li>
                         </ul>
@@ -112,14 +117,13 @@
         && Url.RouteUrl(ViewContext.RouteData.Values) != "/Users/Create"
         && activeUser != null)
         {
-            <div id="char-stats-partial" style="display:block;border:2px solid black;border-radius:15px;height:fit-content;width:fit-content;padding:25px">
+            <div id="char-stats-partial" style="display:block">
                 <a class="btn btn-warning btn-sm" asp-page="/Users/Settings"><i class="fa-solid fa-cog"></i></a>
-
                 @Html.Partial("_CharStats.cshtml")
             </div>
         }
 
-        <div style="padding:25px;margin:auto;text-align:center">
+        <div style="margin:auto;text-align:center">
             @RenderBody()
         </div>
     </div>

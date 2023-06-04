@@ -21,7 +21,7 @@ namespace QuestBoard.Pages
             public String description;
             public String image;
             public bool equipable;
-            public String is_accessory;
+            public String type;
             public String accessory1or2;
         }
         public List<UserItems> listUsersItems = new List<UserItems>();
@@ -55,7 +55,7 @@ namespace QuestBoard.Pages
                         userItems.image = reader.GetString(3);
                         userItems.quantity = reader.GetInt32(4).ToString();
                         userItems.equipable = reader.GetBoolean(5);
-                        userItems.is_accessory = reader.GetString(6);
+                        userItems.type = reader.GetString(6);
 
                         listUsersItems.Add(userItems);
                     }

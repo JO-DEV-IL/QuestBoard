@@ -26,9 +26,9 @@
 
         @if (item.equipable == true)
         {
-            if (item.is_accessory == "Accessory")
+            if (item.type == "Accessory")
             {
-                <div style="display:flex;justify-content:space-between">
+                <div style="">
                     <form asp-page-handler="equipAccessory" method="post">
                         <button class="btn btn-warning" name="buttonID" value="1">Equip Accessory 1</button>
                         <button class="btn btn-warning" name="buttonID" value="2">Equip Accessory 2</button>
