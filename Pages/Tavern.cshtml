@@ -1,4 +1,115 @@
 ﻿@page
 @model QuestBoard.Pages.TavernModel
-@{
-}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Razor Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .large-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f2f2f2;
+            margin-bottom: 20px;
+        }
+
+            .large-card img {
+                width: 300px;
+                height: auto;
+                margin-right: 20px;
+            }
+
+        .large-card-content {
+            flex-grow: 1;
+        }
+
+        .large-card-links {
+            display: flex;
+            flex-direction: column;
+        }
+
+            .large-card-links a {
+                display: block;
+                margin-bottom: 10px;
+                padding: 10px;
+                background-color: #ccc;
+                color: #000;
+                text-decoration: none;
+            }
+
+        .section-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f2f2f2;
+            margin-bottom: 20px;
+        }
+
+            .section-card img {
+                width: 150px;
+                height: auto;
+                margin-right: 20px;
+            }
+
+        .section-card-content {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="large-card">
+            <img src="large-card-image.jpg" alt="Large Card Image">
+            <div class="large-card-content">
+                <h2>Large Card Title</h2>
+                <p>Large Card Description</p>
+            </div>
+            <div class="large-card-links">
+                <a href="#">Story 1</a>
+                <a href="#">Story 2</a>
+                <a href="#">Story 3</a>
+                <a href="#">Story 4</a>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <img src="section-card-image.jpg" alt="Section Card Image">
+            <div class="section-card-content">
+                <h3>Section Card Title 1</h3>
+                <p>Section Card Description</p>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <img src="section-card-image.jpg" alt="Section Card Image">
+            <div class="section-card-content">
+                <h3>Section Card Title 2</h3>
+                <p>Section Card Description</p>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <img src="section-card-image.jpg" alt="Section Card Image">
+            <div class="section-card-content">
+                <h3>Section Card Title 3</h3>
+                <p>Section Card Description</p>
+            </div>
+        </div>
+
+        <!-- Add more section cards as needed -->
+    </div>
+</body>
+</html>

@@ -13,7 +13,6 @@ namespace QuestBoard.Pages
         {
             public String name;
             public String quantity;
-            public String rarity;
             public String image;
         }
 
@@ -32,12 +31,12 @@ namespace QuestBoard.Pages
                     connection.Open();
 
                     String getItems =
-                        "SELECT I.itemID, M.name, M.rarity, M.image, I.quantity"
+                        "SELECT I.itemID, M.name, M.image, I.quantity"
                         + " FROM [questboard_app].[dbo].[user_Inventory] I"
                         + " INNER JOIN [questboard_app].[dbo].[master_Misc_Items] M ON I.itemID = M.id"
                         + " WHERE I.userID = @user"
                         + " UNION ALL"
-                        + " SELECT I.itemId, M.name, M.rarity, M.image, I.quantity"
+                        + " SELECT I.itemId, M.name, M.image, I.quantity"
                         + " FROM [questboard_app].[dbo].[user_Inventory] I"
                         + " INNER JOIN [questboard_app].[dbo].[master_Equipment] M ON I.itemID = M.id"
                         + " WHERE I.userID = @user";
@@ -54,9 +53,8 @@ namespace QuestBoard.Pages
                                 UserItems userItems = new UserItems();
 
                                 userItems.name = reader.GetString(1);
-                                userItems.rarity = reader.GetString(2);
-                                userItems.image = reader.GetString(3);
-                                userItems.quantity = reader.GetInt32(4).ToString();
+                                userItems.image = reader.GetString(2);
+                                userItems.quantity = reader.GetInt32(3).ToString();
 
                                 listUsersItems.Add(userItems);
                             }

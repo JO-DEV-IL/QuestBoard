@@ -5,64 +5,129 @@
     HttpContext.Session.SetString("SelectedItem", itemQ);
 }
 
-<div>
-    <h2>@itemQ</h2>
-
-    @if (Model.errorMessage.Length > 0)
-    {
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>@Model.errorMessage</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+<style>
+    .item-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        /*background-color: #f8f8f8;*/
     }
 
-    @foreach (var item in Model.listUsersItems)
-    {
-        <p>Quantity: @item.quantity</p>
-        <p>Rarity: @item.rarity</p>
+    .item-details {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        <p>@item.description</p>
-        <p><img style="height:200px;" src="~/images/@item.image" alt="alt" /></p>
+    .item-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
 
-        @if (item.equipable == true)
-        {
-            if (item.type == "Accessory")
-            {
-                <div style="">
-                    <form asp-page-handler="equipAccessory" method="post">
-                        <button class="btn btn-warning" name="buttonID" value="1">Equip Accessory 1</button>
-                        <button class="btn btn-warning" name="buttonID" value="2">Equip Accessory 2</button>
-                    </form>
-                    <br />
-                    <form asp-page-handler="unequipAccessory" method="post">
-                        <button class="btn btn-outline-danger" name="buttonID" value="1">Unequip Accessory 1</button>
-                        <button class="btn btn-outline-danger" name="buttonID" value="2">Unequip Accessory 2</button>
-                    </form>
-                </div>
-            }
-            else
-            {
-                <div style="display:flex;justify-content:space-between">
-                    <form asp-page-handler="equip" method="post">
-                        <button class="btn btn-warning">Equip</button>
-                    </form>
-                    <br />
-                    <form asp-page-handler="unequip" method="post">
-                        <button class="btn btn-outline-danger">Unequip</button>
-                    </form>
-                </div>
-            }
+        .item-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
         }
+
+    .item-details-wrapper {
+        flex: 1;
+        padding: 20px;
     }
 
-    @if (Model.successMessage.Length > 0)
-    {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>@Model.successMessage</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" asp-page="/Users/Inventory"></button>
+    .item-details h2 {
+        margin-top: 0;
+        font-size: 24px;
+        color: #333333;
+    }
+
+    .item-details p {
+        margin-bottom: 10px;
+        color: #666666;
+    }
+
+    .item-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    /* Rest of the styles... */
+</style>
+
+<div class="item-container">
+    <div class="item-details">
+        <div class="item-image">
+            @foreach (var item in Model.listUsersItems)
+            {
+                <img src="~/images/@item.image" alt="alt" />
+            }
         </div>
-    }
+        <div class="item-details-wrapper">
+            <h2>@itemQ</h2>
 
-    <br />
-    <a class="btn btn-success" asp-page="/Users/Inventory">Back</a>
+            @if (Model.errorMessage.Length > 0)
+            {
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>@Model.errorMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            @foreach (var item in Model.listUsersItems)
+            {
+                <p>Quantity: @item.quantity</p>
+                <p>Rarity: @item.rarity</p>
+
+                <p>@item.description</p>
+
+                @if (item.equipable == true)
+                {
+                    if (item.type == "Accessory")
+                    {
+                        <div class="item-actions">
+                            <form asp-page-handler="equipAccessory" method="post">
+                                <button class="btn btn-warning" name="buttonID" value="1">Equip Accessory 1</button>
+                                <button class="btn btn-warning" name="buttonID" value="2">Equip Accessory 2</button>
+                            </form>
+                            <form asp-page-handler="unequipAccessory" method="post">
+                                <button class="btn btn-outline-danger" name="buttonID" value="1">Unequip Accessory 1</button>
+                                <button class="btn btn-outline-danger" name="buttonID" value="2">Unequip Accessory 2</button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="item-actions">
+                            <form asp-page-handler="equip" method="post">
+                                <button class="btn btn-warning">Equip</button>
+                            </form>
+                            <form asp-page-handler="unequip" method="post">
+                                <button class="btn btn-outline-danger">Unequip</button>
+                            </form>
+                        </div>
+                    }
+                }
+            }
+
+            @if (Model.successMessage.Length > 0)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>@Model.successMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" asp-page="/Users/Inventory"></button>
+                </div>
+            }
+
+            <br />
+            <a class="btn btn-success" asp-page="/Users/Inventory">Back</a>
+        </div>
+    </div>
 </div>

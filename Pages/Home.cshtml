@@ -1,12 +1,181 @@
 ﻿@page
 @model HomeModel
 
-@{
+@section scripts{
+    <script>
+        var links = ['link1', 'link2', 'link3', 'link4'];
+        var currentIndex = 0;
 
+        function changeBackground(linkId) {
+            currentIndex = links.indexOf(linkId);
+            if (currentIndex === -1) {
+                currentIndex = 0;
+            }
+
+            var mainSectionLinks = document.getElementsByClassName('main-section-links');
+            for (var i = 0; i < mainSectionLinks.length; i++) {
+                mainSectionLinks[i].style.backgroundColor = i === currentIndex ? 'brown' : 'tan';
+            }
+
+            rotateBackground();
+        }
+
+        function rotateBackground() {
+            var mainSection = document.getElementById('main-section');
+            var mainSectionLinks = document.getElementsByClassName('main-section-links');
+            var imageUrl;
+            var newTitle;
+            var newDescription;
+
+            switch (links[currentIndex]) {
+                case 'link1':
+                    imageUrl = 'url(../images/main-section-links/image1.jpg)';
+                    newTitle = 'Visit the Tavern!';
+                    newDescription = 'Beer, card games, laughs, and more!';
+                    break;
+                case 'link2':
+                    imageUrl = 'url(../images/main-section-links/image2.jpg)';
+                    newTitle = 'Dungeons are open!';
+                    newDescription = 'Fight for glory and loot!';
+                    break;
+                case 'link3':
+                    imageUrl = 'url(../images/main-section-links/image3.jpg)';
+                    newTitle = 'Rare drops!';
+                    newDescription = 'All the shiny things!';
+                    break;
+                case 'link4':
+                    imageUrl = 'url(../images/main-section-links/image4.png)';
+                    newTitle = 'New Quests!';
+                    newDescription = 'Added daily!';
+                    break;
+                default:
+                    imageUrl = 'url(../images/main-section-links/default.png)';
+                    newTitle = 'Welcome to QuestBoard!';
+                    newDescription = 'Start your adventure here!';
+                    break;
+            }
+
+            mainSection.style.backgroundImage = imageUrl;
+            mainSection.querySelector('h1').textContent = newTitle;
+            mainSection.querySelector('p').textContent = newDescription;
+
+            for (var i = 0; i < mainSectionLinks.length; i++) {
+                mainSectionLinks[i].style.backgroundColor = i === currentIndex ? 'brown' : 'tan';
+                mainSectionLinks[i].style.color = i === currentIndex ? 'white' : 'black';
+            }
+
+            currentIndex = (currentIndex + 1) % links.length;
+            setTimeout(rotateBackground, 10000);
+        }
+
+        rotateBackground();
+    </script>
 }
 
 <style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
+    .main-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .main-section {
+        background-color: #f2f2f2;
+        text-align: center;
+        height: 400px;
+        border: 1px solid black;
+        margin: 5px;
+        width: 800px;
+    }
+
+    .main-section-content {
+        position: absolute;
+        top: 52%;
+        margin-left: 25px;
+        color: white;
+    }
+
+    .medium-section {
+        background-color: #e6e6e6;
+        padding: 20px;
+        text-align: center;
+        height: 400px;
+        border: 2px solid black;
+        margin: 5px;
+    }
+
+    .small-section {
+        background-color: #d9d9d9;
+        padding: 10px;
+        text-align: center;
+        height: 200px;
+        border: 2px solid black;
+        margin: 5px;
+        width: 500px;
+    }
+
+    .advert {
+        background-color: #d9d9d9;
+        padding: 10px;
+        text-align: center;
+        height: 200px;
+        border: 2px solid black;
+        margin: 5px;
+        width: 163px;
+    }
+
+    .main-section-links {
+        border: 1px solid black;
+        width: 200px;
+        height: 100px;
+        margin-left: 600px;
+        background-color: tan;
+    }
+
+        .main-section-links h3 {
+            margin-top: 30px;
+            text-align: center;
+        }
 </style>
 
-<h2>QuestBoard Home Page</h2>
+<body>
+    <div class="main-container">
+        <div class="main-section" id="main-section" style="background-image: url(../images/main-section-links/default.png); background-size: contain;">
+            <div class="main-section-content">
+                <h1>Welcome to QuestBoard!</h1>
+                <p>Start your adventure here!</p>
+            </div>
+            <div class="main-section-links" id="link1" onclick="changeBackground('link1')" style="background-color: tan;">
+                <h3>Tavern</h3>
+            </div>
+            <div class="main-section-links" id="link2" onclick="changeBackground('link2')" style="background-color: tan;">
+                <h3>Dungeons</h3>
+            </div>
+            <div class="main-section-links" id="link3" onclick="changeBackground('link3')" style="background-color: tan;">
+                <h3>Loot</h3>
+            </div>
+            <div class="main-section-links" id="link4" onclick="changeBackground('link4')" style="background-color: tan;">
+                <h3>Quests</h3>
+            </div>
+        </div>
+        <div class="medium-section">
+            <h2>Secondary (Quest list)</h2>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="small-section">
+            <h3>Small Section</h3>
+        </div>
+        <div class="small-section">
+            <h3>Small Section</h3>
+        </div>
+        <div class="advert">
+            <h3>Advert</h3>
+        </div>
+    </div>
+</body>
